@@ -1,9 +1,11 @@
 package com.zcsoft.rc.user.controller;
 
 
+import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
 import com.sharingif.cube.core.handler.chain.BHMChain;
-import com.zcsoft.rc.bms.api.user.entity.UserLoginReq;
-import com.zcsoft.rc.bms.api.user.entity.UserLoginRsp;
+import com.zcsoft.rc.api.user.entity.UserLoginReq;
+import com.zcsoft.rc.api.user.entity.UserLoginRsp;
+import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +34,8 @@ public class UserController {
 	 */
 	@BHMChain(ref = "loginChain")
 	@RequestMapping(value="login", method= RequestMethod.POST)
-	public UserLoginRsp login(@Valid UserLoginReq req){
-		return userService.login(req);
+	public UserLoginRsp login(@Valid UserLoginReq req, @DataContainer User user){
+		return userService.login(req, user);
 	}
 
 	/**

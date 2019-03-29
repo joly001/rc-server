@@ -27,7 +27,6 @@ public class ChainAutoconfigure {
     public ChainImpl<HandlerMethodContent> createLoginPassChain(
             UserLoginReqConvertToUserCommand userLoginReqConvertToUserCommand
             , SecurityAuthenticationCommand securityAuthenticationCommand
-            , RoleAuthenticationCommand roleAuthenticationCommand
             , SessionConcurrentWebCommand sessionConcurrentWebCommand
             , InvalidateHttpSessionWebCommand invalidateHttpSessionWebCommand
             , CoreUserHttpSessionManageWebCommand coreUserHttpSessionManageWebCommand
@@ -37,7 +36,6 @@ public class ChainAutoconfigure {
         List<Command<? super HandlerMethodContent>> commands = new ArrayList<Command<? super HandlerMethodContent>>();
         commands.add(userLoginReqConvertToUserCommand);
         commands.add(securityAuthenticationCommand);
-        commands.add(roleAuthenticationCommand);
         commands.add(sessionConcurrentWebCommand);
         commands.add(invalidateHttpSessionWebCommand);
         commands.add(coreUserHttpSessionManageWebCommand);

@@ -54,6 +54,7 @@ public class PasswordAuthenticationHandler extends TextEncryptorPasswordAuthenti
 		user.setMobilePrefix(queryUser.getMobilePrefix());
 		user.setMobile(queryUser.getMobile());
 		user.setUserType(queryUser.getUserType());
+		user.setWristStrapCode(queryUser.getWristStrapCode());
 		user.setStatus(queryUser.getStatus());
 
 	}
