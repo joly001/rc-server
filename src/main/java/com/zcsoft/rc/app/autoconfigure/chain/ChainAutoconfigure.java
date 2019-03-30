@@ -4,7 +4,6 @@ package com.zcsoft.rc.app.autoconfigure.chain;
 import com.sharingif.cube.core.chain.ChainImpl;
 import com.sharingif.cube.core.chain.command.Command;
 import com.sharingif.cube.core.handler.chain.*;
-import com.sharingif.cube.security.handler.chain.command.authentication.RoleAuthenticationCommand;
 import com.sharingif.cube.security.handler.chain.command.authentication.SecurityAuthenticationCommand;
 import com.sharingif.cube.security.web.handler.chain.command.authentication.SessionConcurrentWebCommand;
 import com.sharingif.cube.security.web.handler.chain.command.user.CoreUserHttpSessionManageWebCommand;
@@ -13,7 +12,9 @@ import com.sharingif.cube.security.web.handler.chain.session.SessionExpireChain;
 import com.sharingif.cube.security.web.spring.handler.chain.command.session.SessionRegistryCommand;
 import com.zcsoft.rc.app.chain.UserAuthorityAccessDecisionChain;
 import com.zcsoft.rc.app.chain.command.UserConvertToUserLoginReqCommand;
+import com.zcsoft.rc.app.chain.command.UserConvertToUserTokenLoginReqCommand;
 import com.zcsoft.rc.app.chain.command.UserLoginReqConvertToUserCommand;
+import com.zcsoft.rc.app.chain.command.UserTokenLoginReqConvertToUserCommand;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,6 +42,31 @@ public class ChainAutoconfigure {
         commands.add(coreUserHttpSessionManageWebCommand);
         commands.add(sessionRegistryCommand);
         commands.add(userConvertToUserLoginReqCommand);
+
+        ChainImpl loginChain = new ChainImpl();
+        loginChain.setCommands(commands);
+
+        return loginChain;
+    }
+
+    @Bean("tokenLoginChain")
+    public ChainImpl<HandlerMethodContent> createLoginPassChain(
+            UserTokenLoginReqConvertToUserCommand userTokenLoginReqConvertToUserCommand
+            , SecurityAuthenticationCommand tokenSecurityAuthenticationCommand
+            , SessionConcurrentWebCommand sessionConcurrentWebCommand
+            , InvalidateHttpSessionWebCommand invalidateHttpSessionWebCommand
+            , CoreUserHttpSessionManageWebCommand coreUserHttpSessionManageWebCommand
+            , SessionRegistryCommand sessionRegistryCommand
+            , UserConvertToUserTokenLoginReqCommand userConvertToUserTokenLoginReqCommand
+    ) {
+        List<Command<? super HandlerMethodContent>> commands = new ArrayList<Command<? super HandlerMethodContent>>();
+        commands.add(userTokenLoginReqConvertToUserCommand);
+        commands.add(tokenSecurityAuthenticationCommand);
+        commands.add(sessionConcurrentWebCommand);
+        commands.add(invalidateHttpSessionWebCommand);
+        commands.add(coreUserHttpSessionManageWebCommand);
+        commands.add(sessionRegistryCommand);
+        commands.add(userConvertToUserTokenLoginReqCommand);
 
         ChainImpl loginChain = new ChainImpl();
         loginChain.setCommands(commands);

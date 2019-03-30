@@ -18,6 +18,13 @@ public interface UserService extends IBaseService<User, String> {
     User getByUsername(String username);
 
     /**
+     * 根据token查询用户
+     * @param token
+     * @return
+     */
+    User getByToken(String token);
+
+    /**
      * 用户登录
      * @param req
      * @param user
@@ -28,9 +35,10 @@ public interface UserService extends IBaseService<User, String> {
     /**
      * 用户token登录
      * @param req
+     * @param user
      * @return
      */
-    UserLoginRsp tokenLogin(UserTokenLoginReq req);
+    UserLoginRsp tokenLogin(UserTokenLoginReq req, User user);
 
     /**
      * 用户安全退出

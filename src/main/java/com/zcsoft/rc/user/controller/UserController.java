@@ -43,9 +43,10 @@ public class UserController {
 	/**
 	 * 用户token登录
 	 */
+	@BHMChain(ref = "tokenLoginChain")
 	@RequestMapping(value="tokenLogin", method= RequestMethod.POST)
-	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
-		return userService.tokenLogin(req);
+	public UserLoginRsp tokenLogin(UserTokenLoginReq req, @DataContainer User user) {
+		return userService.tokenLogin(req, user);
 	}
 
 	/**

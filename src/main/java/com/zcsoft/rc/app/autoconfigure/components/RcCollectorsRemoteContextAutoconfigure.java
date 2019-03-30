@@ -58,8 +58,7 @@ public class RcCollectorsRemoteContextAutoconfigure {
     ) {
         List<String> services = new ArrayList<String>();
 
-        services.add("com.sharingif.blockchain.api.ether.service.EtherApiService");
-        services.add("com.sharingif.blockchain.api.bitcoin.service.BitCoinApiService");
+        services.add("com.zcsoft.rc.collectors.api.zc.service.ZcApiService");
 
         RemoteServices remoteServices = new RemoteServices();
         remoteServices.setRequestContextResolver(handlerMethodCommunicationTransportRequestContextResolver);

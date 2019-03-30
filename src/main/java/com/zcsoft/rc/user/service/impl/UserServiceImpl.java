@@ -1,14 +1,12 @@
 package com.zcsoft.rc.user.service.impl;
 
 
-import com.sharingif.cube.core.exception.validation.ValidationCubeException;
 import com.sharingif.cube.core.util.DateUtils;
 import com.sharingif.cube.core.util.UUIDUtils;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
 import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
-import com.zcsoft.rc.app.constants.ErrorConstants;
 import com.zcsoft.rc.user.dao.UserDAO;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
@@ -44,6 +42,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		return userDAO.query(user);
 	}
 
+	@Override
+	public User getByToken(String token) {
+		User tokenUser = new User();
+		tokenUser.setLoginToken(token);
+
+		return userDAO.query(tokenUser);
+	}
+
 	protected void updateUserToken(User user) {
 		String loginToken = UUIDUtils.generateUUID();
 		Date loginTokenExpiratTime = DateUtils.addDateDay(new Date(), userTokenExpireDaily);
@@ -76,19 +82,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	}
 
 	@Override
-	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
-		User tokenUser = new User();
-		tokenUser.setLoginToken(req.getLoginToken());
+	public UserLoginRsp tokenLogin(UserTokenLoginReq req, User user) {
+		updateUserToken(user);
 
-		tokenUser = userDAO.query(tokenUser);
-
-		if(null == tokenUser){
-			throw new ValidationCubeException(ErrorConstants.USER_LOGIN_AT_OTHER_DEVICE);
-		}
-
-		updateUserToken(tokenUser);
-
-		return userConvertToUserLoginRsp(tokenUser);
+		return userConvertToUserLoginRsp(user);
 
 	}
 
