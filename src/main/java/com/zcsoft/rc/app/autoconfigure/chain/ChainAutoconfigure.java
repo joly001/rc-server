@@ -53,14 +53,12 @@ public class ChainAutoconfigure {
 
         List<String> excludeMethods = new ArrayList<String>();
         excludeMethods.add("user.controller.UserController.login");
+        excludeMethods.add("user.controller.UserController.tokenLogin");
 
-        List<String> commomAuthority = new ArrayList<>();
-        commomAuthority.add("user.controller.UserController.signOut");
 
         UserAuthorityAccessDecisionChain noUserChain = new UserAuthorityAccessDecisionChain();
         noUserChain.setExcludeMethods(excludeMethods);
-        noUserChain.setCommomAuthority(commomAuthority);
-        noUserChain.setReplaceContent("com.zcsoft.rc.bms.");
+        noUserChain.setReplaceContent("com.zcsoft.rc.");
 
         return noUserChain;
     }

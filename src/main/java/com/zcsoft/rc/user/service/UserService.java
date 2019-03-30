@@ -4,6 +4,7 @@ package com.zcsoft.rc.user.service;
 import com.sharingif.cube.support.service.base.IBaseService;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
+import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
 import com.zcsoft.rc.user.model.entity.User;
 
 
@@ -23,6 +24,19 @@ public interface UserService extends IBaseService<User, String> {
      * @return
      */
     UserLoginRsp login(UserLoginReq req, User user);
+
+    /**
+     * 用户token登录
+     * @param req
+     * @return
+     */
+    UserLoginRsp tokenLogin(UserTokenLoginReq req);
+
+    /**
+     * 用户安全退出
+     * @param user
+     */
+    void signOut(User user);
 
 
 }

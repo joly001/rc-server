@@ -2,9 +2,11 @@ package com.zcsoft.rc.user.controller;
 
 
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
+import com.sharingif.cube.core.handler.chain.AHMChain;
 import com.sharingif.cube.core.handler.chain.BHMChain;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
+import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -39,12 +41,20 @@ public class UserController {
 	}
 
 	/**
+	 * 用户token登录
+	 */
+	@RequestMapping(value="tokenLogin", method= RequestMethod.POST)
+	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
+		return userService.tokenLogin(req);
+	}
+
+	/**
 	 * 用户安全退出
 	 */
-	@BHMChain(ref="signOutChain")
+	@AHMChain(ref="signOutChain")
 	@RequestMapping(value="signOut", method= RequestMethod.POST)
-	public void signOut() {
-
+	public void signOut(@DataContainer User user) {
+		userService.signOut(user);
 	}
 
 }
