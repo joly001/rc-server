@@ -4,19 +4,20 @@ package com.zcsoft.rc.user.service.impl;
 import com.sharingif.cube.core.util.DateUtils;
 import com.sharingif.cube.core.util.UUIDUtils;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
-import com.zcsoft.rc.api.user.entity.UserLoginReq;
-import com.zcsoft.rc.api.user.entity.UserLoginRsp;
-import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
+import com.zcsoft.rc.api.user.entity.*;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService {
@@ -56,6 +57,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		tokenUser.setLoginToken(token);
 
 		return userDAO.query(tokenUser);
+	}
+
+	@Override
+	public List<User> getOrganizationId(String organizationId) {
+		User queryUser = new User();
+		queryUser.setOrganizationId(organizationId);
+
+		return userDAO.queryList(queryUser);
 	}
 
 	protected void updateUserToken(User user) {
@@ -118,5 +127,38 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	@Override
 	public void collectDriver(ZcReq req) {
 		zcApiService.collectDriver(req);
+	}
+
+	@Override
+	public UserFollowListListRsp followList(User user) {
+		List<User> userList = userDAO.queryUserFollowListByUserId(user.getId());
+
+		UserFollowListListRsp rsp = new UserFollowListListRsp();
+		if(userList == null || userList.isEmpty()) {
+			return rsp;
+		}
+
+		List<UserFollowListRsp> userFollowListRspList = new ArrayList<>(userList.size());
+		userList.forEach(queryUser -> {
+			UserFollowListRsp userFollowListRsp = new UserFollowListRsp();
+			BeanUtils.copyProperties(queryUser, userFollowListRsp);
+
+			userFollowListRspList.add(userFollowListRsp);
+		});
+		rsp.setList(userFollowListRspList);
+
+		return rsp;
+	}
+
+	@Override
+	public UserOrganizationListRsp userOrganization(UserOrganizationReq req, User user) {
+		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId());
+
+
+
+		UserOrganizationListRsp rsp = new UserOrganizationListRsp();
+//		rsp.setList();
+
+		return null;
 	}
 }

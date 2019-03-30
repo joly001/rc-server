@@ -4,6 +4,7 @@ package com.zcsoft.rc.user.controller;
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
 import com.sharingif.cube.core.handler.chain.AHMChain;
 import com.sharingif.cube.core.handler.chain.BHMChain;
+import com.zcsoft.rc.api.user.entity.UserFollowListListRsp;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
 import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
@@ -75,6 +76,16 @@ public class UserController {
 	@RequestMapping(value="collectDriver", method= RequestMethod.POST)
 	public void collectDriver(@Valid ZcReq req) {
 		userService.collectDriver(req);
+	}
+
+	/**
+	 * 用户关注列表
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="followList", method= RequestMethod.POST)
+	public UserFollowListListRsp followList(@DataContainer User user) {
+		return userService.followList(user);
 	}
 
 }
