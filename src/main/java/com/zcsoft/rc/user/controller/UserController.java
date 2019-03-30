@@ -4,10 +4,7 @@ package com.zcsoft.rc.user.controller;
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
 import com.sharingif.cube.core.handler.chain.AHMChain;
 import com.sharingif.cube.core.handler.chain.BHMChain;
-import com.zcsoft.rc.api.user.entity.UserFollowListListRsp;
-import com.zcsoft.rc.api.user.entity.UserLoginReq;
-import com.zcsoft.rc.api.user.entity.UserLoginRsp;
-import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
+import com.zcsoft.rc.api.user.entity.*;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
@@ -86,6 +83,17 @@ public class UserController {
 	@RequestMapping(value="followList", method= RequestMethod.POST)
 	public UserFollowListListRsp followList(@DataContainer User user) {
 		return userService.followList(user);
+	}
+
+	/**
+	 * 组织用户列表
+	 * @param req
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="userOrganization", method= RequestMethod.POST)
+	public UserOrganizationListRsp userOrganization(UserOrganizationReq req, @DataContainer User user) {
+		return userService.userOrganization(req, user);
 	}
 
 }

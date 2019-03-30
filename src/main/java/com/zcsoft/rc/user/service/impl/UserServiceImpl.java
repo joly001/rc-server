@@ -154,11 +154,22 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public UserOrganizationListRsp userOrganization(UserOrganizationReq req, User user) {
 		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId());
 
-
-
 		UserOrganizationListRsp rsp = new UserOrganizationListRsp();
-//		rsp.setList();
 
-		return null;
+		if(userList == null || userList.isEmpty()) {
+			return rsp;
+		}
+
+		List<UserOrganizationRsp> userOrganizationRspList = new ArrayList<>(userList.size());
+		userList.forEach(queryUser -> {
+			UserOrganizationRsp userOrganizationRsp = new UserOrganizationRsp();
+			BeanUtils.copyProperties(queryUser, userOrganizationRsp);
+
+			userOrganizationRspList.add(userOrganizationRsp);
+		});
+
+		rsp.setList(userOrganizationRspList);
+
+		return rsp;
 	}
 }

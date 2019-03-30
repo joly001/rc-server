@@ -41,7 +41,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 
 		UserFollow queryUserFollow = userFollowDAO.query(userFollow);
 
-		if(queryUserFollow == null) {
+		if(queryUserFollow != null) {
 			return;
 		}
 
