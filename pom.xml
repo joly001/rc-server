@@ -57,7 +57,7 @@
   </dependencies>
 
   <build>
-    <finalName>rc-bms</finalName>
+    <finalName>rc-server</finalName>
     <resources>
       <resource>
         <directory>src\main\java</directory>
