@@ -27,18 +27,16 @@ public interface UserService extends IBaseService<User, String> {
     /**
      * 用户登录
      * @param req
-     * @param user
      * @return
      */
-    UserLoginRsp login(UserLoginReq req, User user);
+    UserLoginRsp login(UserLoginReq req);
 
     /**
      * 用户token登录
      * @param req
-     * @param user
      * @return
      */
-    UserLoginRsp tokenLogin(UserTokenLoginReq req, User user);
+    UserLoginRsp tokenLogin(UserTokenLoginReq req);
 
     /**
      * 用户安全退出

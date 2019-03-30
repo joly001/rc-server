@@ -36,8 +36,8 @@ public class UserController {
 	 */
 	@BHMChain(ref = "loginChain")
 	@RequestMapping(value="login", method= RequestMethod.POST)
-	public UserLoginRsp login(@Valid UserLoginReq req, @DataContainer User user){
-		return userService.login(req, user);
+	public UserLoginRsp login(@Valid UserLoginReq req){
+		return userService.login(req);
 	}
 
 	/**
@@ -45,8 +45,8 @@ public class UserController {
 	 */
 	@BHMChain(ref = "tokenLoginChain")
 	@RequestMapping(value="tokenLogin", method= RequestMethod.POST)
-	public UserLoginRsp tokenLogin(UserTokenLoginReq req, @DataContainer User user) {
-		return userService.tokenLogin(req, user);
+	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
+		return userService.tokenLogin(req);
 	}
 
 	/**

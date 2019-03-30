@@ -75,14 +75,18 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	}
 
 	@Override
-	public UserLoginRsp login(UserLoginReq req, User user) {
+	public UserLoginRsp login(UserLoginReq req) {
+		User user = getByUsername(req.getUsername());
+
 		updateUserToken(user);
 
 		return userConvertToUserLoginRsp(user);
 	}
 
 	@Override
-	public UserLoginRsp tokenLogin(UserTokenLoginReq req, User user) {
+	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
+		User user = getByToken(req.getLoginToken());
+
 		updateUserToken(user);
 
 		return userConvertToUserLoginRsp(user);
