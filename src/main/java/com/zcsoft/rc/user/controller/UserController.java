@@ -7,6 +7,7 @@ import com.sharingif.cube.core.handler.chain.BHMChain;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
 import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
+import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,24 @@ public class UserController {
 	@RequestMapping(value="signOut", method= RequestMethod.POST)
 	public void signOut(@DataContainer User user) {
 		userService.signOut(user);
+	}
+
+	/**
+	 * 施工人员数据收集
+	 * @param req
+	 */
+	@RequestMapping(value="collectBuilder", method= RequestMethod.POST)
+	public void collectBuilder(@Valid ZcReq req) {
+		userService.collectBuilder(req);
+	}
+
+	/**
+	 * 司机数据收集
+	 * @param req
+	 */
+	@RequestMapping(value="collectDriver", method= RequestMethod.POST)
+	public void collectDriver(@Valid ZcReq req) {
+		userService.collectDriver(req);
 	}
 
 }

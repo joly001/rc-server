@@ -7,6 +7,8 @@ import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
 import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
+import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
+import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
@@ -23,6 +25,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 	private int userTokenExpireDaily;
 
+	private ZcApiService zcApiService;
+
 	@Value("${user.token.expire.daily}")
 	public void setUserTokenExpireDaily(int userTokenExpireDaily) {
 		this.userTokenExpireDaily = userTokenExpireDaily;
@@ -32,6 +36,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public void setUserDAO(UserDAO userDAO) {
 		super.setBaseDAO(userDAO);
 		this.userDAO = userDAO;
+	}
+	@Resource
+	public void setZcApiService(ZcApiService zcApiService) {
+		this.zcApiService = zcApiService;
 	}
 
 	@Override
@@ -100,5 +108,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		user.setLoginTokenExpiratTime(new Date());
 
 		userDAO.updateById(updateUser);
+	}
+
+	@Override
+	public void collectBuilder(ZcReq req) {
+		zcApiService.collectBuilder(req);
+	}
+
+	@Override
+	public void collectDriver(ZcReq req) {
+		zcApiService.collectDriver(req);
 	}
 }

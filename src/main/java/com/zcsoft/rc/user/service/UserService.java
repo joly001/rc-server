@@ -1,10 +1,13 @@
 package com.zcsoft.rc.user.service;
 
 
+import com.sharingif.cube.core.handler.bind.annotation.RequestMapping;
+import com.sharingif.cube.core.handler.bind.annotation.RequestMethod;
 import com.sharingif.cube.support.service.base.IBaseService;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.api.user.entity.UserLoginRsp;
 import com.zcsoft.rc.api.user.entity.UserTokenLoginReq;
+import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.user.model.entity.User;
 
 
@@ -43,6 +46,20 @@ public interface UserService extends IBaseService<User, String> {
      * @param user
      */
     void signOut(User user);
+
+    /**
+     * 施工人员数据收集
+     * @param req
+     */
+    @RequestMapping(value="collectBuilder", method= RequestMethod.POST)
+    void collectBuilder(ZcReq req);
+
+    /**
+     * 司机数据收集
+     * @param req
+     */
+    @RequestMapping(value="collectDriver", method= RequestMethod.POST)
+    void collectDriver(ZcReq req);
 
 
 }
