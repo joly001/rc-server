@@ -9,6 +9,7 @@ import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
 import com.zcsoft.rc.user.model.entity.User;
+import com.zcsoft.rc.user.model.entity.UserFollow;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -152,7 +153,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 	@Override
 	public UserOrganizationListRsp userOrganization(UserOrganizationReq req, User user) {
-		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId());
+		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER);
 
 		UserOrganizationListRsp rsp = new UserOrganizationListRsp();
 

@@ -34,10 +34,11 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		this.userService = userService;
 	}
 
-	protected void follow(String userFollowId, String userId) {
+	protected void follow(String userFollowId, String userId, String followType) {
 		UserFollow userFollow = new UserFollow();
 		userFollow.setUserId(userId);
 		userFollow.setUserFollowId(userFollowId);
+		userFollow.setFollowType(followType);
 
 		UserFollow queryUserFollow = userFollowDAO.query(userFollow);
 
@@ -51,7 +52,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 	@Override
 	public void follow(UserFollowReq req, User user) {
 		if(StringUtils.isTrimEmpty(req.getOrganizationId())) {
-			follow(req.getUserFollowId(), user.getId());
+			follow(req.getUserFollowId(), user.getId(), UserFollow.FOLLOW_TYPE_USER);
 
 			return;
 		}
@@ -63,7 +64,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		}
 
 		userList.forEach(queryUser -> {
-			follow(queryUser.getId(), user.getId());
+			follow(queryUser.getId(), user.getId(), UserFollow.FOLLOW_TYPE_USER);
 		});
 
 	}
@@ -74,12 +75,13 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 			UserFollow userFollow = new UserFollow();
 			userFollow.setUserId(user.getId());
 			userFollow.setUserFollowId(req.getUserFollowId());
+			userFollow.setFollowType(UserFollow.FOLLOW_TYPE_USER);
 
 			userFollowDAO.deleteByCondition(userFollow);
 
 			return;
 		}
 
-		userFollowDAO.deleteByUserIdOrganizationId(user.getId(), req.getOrganizationId());
+		userFollowDAO.deleteByUserIdOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER);
 	}
 }
