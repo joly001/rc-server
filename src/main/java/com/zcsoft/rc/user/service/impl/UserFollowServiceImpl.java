@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 
 import com.sharingif.cube.core.util.StringUtils;
 import com.zcsoft.rc.api.user.entity.UserFollowReq;
+import com.zcsoft.rc.api.user.entity.UserMachineryFollowReq;
+import com.zcsoft.rc.api.user.entity.UserMachineryUnFollowReq;
 import com.zcsoft.rc.api.user.entity.UserUnFollowReq;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
@@ -69,19 +71,32 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 
 	}
 
+	protected void unFollow(String userFollowId, String userId, String followType) {
+		UserFollow userFollow = new UserFollow();
+		userFollow.setUserId(userId);
+		userFollow.setUserFollowId(userFollowId);
+		userFollow.setFollowType(followType);
+
+		userFollowDAO.deleteByCondition(userFollow);
+	}
+
 	@Override
 	public void unFollow(UserUnFollowReq req, User user) {
 		if(StringUtils.isTrimEmpty(req.getOrganizationId())) {
-			UserFollow userFollow = new UserFollow();
-			userFollow.setUserId(user.getId());
-			userFollow.setUserFollowId(req.getUserFollowId());
-			userFollow.setFollowType(UserFollow.FOLLOW_TYPE_USER);
-
-			userFollowDAO.deleteByCondition(userFollow);
-
+			unFollow(req.getUserFollowId(), user.getId(), UserFollow.FOLLOW_TYPE_USER);
 			return;
 		}
 
 		userFollowDAO.deleteByUserIdOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER);
+	}
+
+	@Override
+	public void machineryFollow(UserMachineryFollowReq req, User user) {
+		follow(req.getUserFollowId(), user.getId(), UserFollow.FOLLOW_TYPE_MACHINERY);
+	}
+
+	@Override
+	public void machineryUnFollow(UserMachineryUnFollowReq req, User user) {
+		unFollow(req.getUserFollowId(), user.getId(), UserFollow.FOLLOW_TYPE_MACHINERY);
 	}
 }
