@@ -45,7 +45,7 @@ public class MachineryServiceImpl extends BaseServiceImpl<Machinery, java.lang.S
 			machineryRspList.add(machineryRsp);
 		});
 
-		rsp.setMachineryRspList(machineryRspList);
+		rsp.setList(machineryRspList);
 
 		return rsp;
 	}
