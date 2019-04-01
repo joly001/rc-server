@@ -8,8 +8,10 @@ import com.zcsoft.rc.api.user.entity.*;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
+import com.zcsoft.rc.user.model.entity.Organization;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.model.entity.UserFollow;
+import com.zcsoft.rc.user.service.OrganizationService;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	private int userTokenExpireDaily;
 
 	private ZcApiService zcApiService;
+	private OrganizationService organizationService;
 
 	@Value("${user.token.expire.daily}")
 	public void setUserTokenExpireDaily(int userTokenExpireDaily) {
@@ -42,6 +45,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	@Resource
 	public void setZcApiService(ZcApiService zcApiService) {
 		this.zcApiService = zcApiService;
+	}
+	@Resource
+	public void setOrganizationService(OrganizationService organizationService) {
+		this.organizationService = organizationService;
 	}
 
 	@Override
@@ -98,7 +105,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		updateUserToken(user);
 
-		return userConvertToUserLoginRsp(user);
+		UserLoginRsp rsp = userConvertToUserLoginRsp(user);
+
+		Organization organization = organizationService.getById(user.getOrganizationId());
+		rsp.setOrgName(organization.getOrgName());
+
+		return rsp;
 	}
 
 	@Override
@@ -107,8 +119,12 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		updateUserToken(user);
 
-		return userConvertToUserLoginRsp(user);
+		UserLoginRsp rsp = userConvertToUserLoginRsp(user);
 
+		Organization organization = organizationService.getById(user.getOrganizationId());
+		rsp.setOrgName(organization.getOrgName());
+
+		return rsp;
 	}
 
 	@Override
