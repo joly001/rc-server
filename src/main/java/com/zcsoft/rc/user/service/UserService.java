@@ -71,6 +71,13 @@ public interface UserService extends IBaseService<User, String> {
     UserPhotoRsp userPhoto(MultipartFile photoFile, User user);
 
     /**
+     * 用户详情
+     * @param userId
+     * @return
+     */
+    UserLoginRsp details(String userId);
+
+    /**
      * 施工人员数据收集
      * @param req
      */

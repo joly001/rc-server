@@ -101,22 +101,14 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		userDAO.updateById(updateUser);
 	}
 
-	protected UserLoginRsp userConvertToUserLoginRsp(User user) {
-		UserLoginRsp userLoginRsp = new UserLoginRsp();
-		userLoginRsp.setNick(user.getNick());
-		userLoginRsp.setWristStrapCode(user.getWristStrapCode());
-		userLoginRsp.setLoginToken(user.getLoginToken());
-
-		return userLoginRsp;
-	}
-
 	@Override
 	public UserLoginRsp login(UserLoginReq req) {
 		User user = getByUsername(req.getUsername());
 
 		updateUserToken(user);
 
-		UserLoginRsp rsp = userConvertToUserLoginRsp(user);
+		UserLoginRsp rsp = new UserLoginRsp();
+		BeanUtils.copyProperties(user, rsp);
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
@@ -130,7 +122,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		updateUserToken(user);
 
-		UserLoginRsp rsp = userConvertToUserLoginRsp(user);
+		UserLoginRsp rsp = new UserLoginRsp();
+		BeanUtils.copyProperties(user, rsp);
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
@@ -204,8 +197,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		UserUpdateRsp rsp = new UserUpdateRsp();
 		BeanUtils.copyProperties(req, rsp);
 
-		Organization organization = organizationService.getById(user.getOrganizationId());
+		Organization organization = organizationService.getById(queryUser.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
+		rsp.setBuilderUserType(queryUser.getBuilderUserType());
 
 		return rsp;
 	}
@@ -228,6 +222,19 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		UserPhotoRsp rsp = new UserPhotoRsp();
 		rsp.setUserPhotoPath(savePhotoPath);
+
+		return rsp;
+	}
+
+	@Override
+	public UserLoginRsp details(String userId) {
+		User user = userDAO.queryById(userId);
+
+		UserLoginRsp rsp = new UserLoginRsp();
+		BeanUtils.copyProperties(user, rsp);
+
+		Organization organization = organizationService.getById(user.getOrganizationId());
+		rsp.setOrgName(organization.getOrgName());
 
 		return rsp;
 	}

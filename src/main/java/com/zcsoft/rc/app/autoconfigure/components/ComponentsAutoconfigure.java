@@ -17,10 +17,10 @@ import java.util.Map;
 public class ComponentsAutoconfigure {
 
     @Bean(name="fileResourceHttpRequestHandler")
-    public ResourceHttpRequestHandler createFileResourceHttpRequestHandler(@Value("${user.photo.file.path}") String driverPhotoFilePath) {
+    public ResourceHttpRequestHandler createFileResourceHttpRequestHandler(@Value("${user.photo.file.path}") String userPhotoFilePath) {
 
         List<Resource> locations = new ArrayList<>();
-        locations.add(new PathResource(driverPhotoFilePath));
+        locations.add(new PathResource(userPhotoFilePath));
 
         ResourceHttpRequestHandler resourceHttpRequestHandler = new ResourceHttpRequestHandler();
         resourceHttpRequestHandler.setLocations(locations);

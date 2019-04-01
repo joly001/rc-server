@@ -80,6 +80,16 @@ public class UserController {
 	}
 
 	/**
+	 * 用户详情
+	 * @param user
+	 * @return
+	 */
+	@RequestMapping(value="details", method= RequestMethod.POST)
+	public UserLoginRsp details(@DataContainer User user) {
+		return userService.details(user.getId());
+	}
+
+	/**
 	 * 施工人员数据收集
 	 * @param req
 	 */
