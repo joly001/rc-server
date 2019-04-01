@@ -2,6 +2,7 @@ package com.zcsoft.rc.user.controller;
 
 
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
+import com.sharingif.cube.core.handler.bind.annotation.FileSettings;
 import com.sharingif.cube.core.handler.chain.AHMChain;
 import com.sharingif.cube.core.handler.chain.BHMChain;
 import com.zcsoft.rc.api.user.entity.*;
@@ -11,6 +12,7 @@ import com.zcsoft.rc.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -55,6 +57,26 @@ public class UserController {
 	@RequestMapping(value="signOut", method= RequestMethod.POST)
 	public void signOut(@DataContainer User user) {
 		userService.signOut(user);
+	}
+
+	/**
+	 * 用户修改
+	 * @param req
+	 * @return
+	 */
+	@RequestMapping(value="update", method= RequestMethod.POST)
+	public UserUpdateRsp update(UserUpdateReq req) {
+		return userService.update(req);
+	}
+
+	/**
+	 * 用户上传图片
+	 * @param photoFile
+	 * @return
+	 */
+	@RequestMapping(value="userPhoto", method= RequestMethod.POST)
+	public UserPhotoRsp userPhoto(@FileSettings(fileTypes = {"JPG", "JPEG", "PNG"}, maxSize = 1024*1024*5) MultipartFile photoFile, @DataContainer User user) {
+		return userService.userPhoto(photoFile, user);
 	}
 
 	/**

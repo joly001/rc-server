@@ -1,10 +1,13 @@
 package com.zcsoft.rc.user.service.impl;
 
 
+import com.sharingif.cube.core.exception.UnknownCubeException;
+import com.sharingif.cube.core.exception.validation.ValidationCubeException;
 import com.sharingif.cube.core.util.DateUtils;
 import com.sharingif.cube.core.util.UUIDUtils;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.user.entity.*;
+import com.zcsoft.rc.app.constants.ErrorConstants;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
@@ -13,11 +16,15 @@ import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.model.entity.UserFollow;
 import com.zcsoft.rc.user.service.OrganizationService;
 import com.zcsoft.rc.user.service.UserService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +35,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	private UserDAO userDAO;
 
 	private int userTokenExpireDaily;
+	private String userPhotoFilePath;
 
 	private ZcApiService zcApiService;
 	private OrganizationService organizationService;
@@ -36,7 +44,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public void setUserTokenExpireDaily(int userTokenExpireDaily) {
 		this.userTokenExpireDaily = userTokenExpireDaily;
 	}
-
+	@Value("${user.photo.file.path}")
+	public void setUserPhotoFilePath(String userPhotoFilePath) {
+		this.userPhotoFilePath = userPhotoFilePath;
+	}
 	@Resource
 	public void setUserDAO(UserDAO userDAO) {
 		super.setBaseDAO(userDAO);
@@ -134,6 +145,91 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		user.setLoginTokenExpiratTime(new Date());
 
 		userDAO.updateById(updateUser);
+	}
+
+	protected void verifyIdExistence(User user) {
+		if(user == null) {
+			throw new ValidationCubeException(ErrorConstants.USER_NOT_EXIST);
+		}
+	}
+
+	protected void verifyMobileExistence(String id, String mobile) {
+		User user = new User();
+		user.setMobile(mobile);
+
+		user = userDAO.query(user);
+
+		if(user == null) {
+			return;
+		}
+
+		if(user.getId().equals(id)) {
+			return;
+		}
+
+		throw new ValidationCubeException(ErrorConstants.USER_MOBILE_ALREADY_EXIST);
+	}
+
+	protected void verifyWristStrapCodeExistence(String id, String wristStrapCode) {
+		User user = new User();
+		user.setWristStrapCode(wristStrapCode);
+
+		user = userDAO.query(user);
+
+		if(user == null) {
+			return;
+		}
+
+		if(user.getId().equals(id)) {
+			return;
+		}
+
+		throw new ValidationCubeException(ErrorConstants.USER_WRISTSTRAPCODE_ALREADY_EXIST);
+	}
+
+	@Override
+	public UserUpdateRsp update(UserUpdateReq req) {
+		User queryUser = userDAO.queryById(req.getId());
+		verifyIdExistence(queryUser);
+
+		verifyMobileExistence(req.getId(), req.getMobile());
+
+		verifyWristStrapCodeExistence(req.getId(), req.getWristStrapCode());
+
+		User user = new User();
+		BeanUtils.copyProperties(req, user);
+
+		userDAO.updateById(user);
+
+		UserUpdateRsp rsp = new UserUpdateRsp();
+		BeanUtils.copyProperties(req, rsp);
+
+		Organization organization = organizationService.getById(user.getOrganizationId());
+		rsp.setOrgName(organization.getOrgName());
+
+		return rsp;
+	}
+
+	@Override
+	public UserPhotoRsp userPhoto(MultipartFile photoFile, User user) {
+		String userId = user.getId();
+
+		StringBuffer pathBuffer =  new StringBuffer(userPhotoFilePath);
+		String pid = UUIDUtils.generateUUID();
+		String aftFix = photoFile.getOriginalFilename().substring(photoFile.getOriginalFilename().lastIndexOf("."));
+		String savePhotoPath = new StringBuilder().append(userId).append("/").append(pid).append(aftFix).toString();
+		String filePath = pathBuffer.append("/").append(savePhotoPath).toString();
+
+		try {
+			FileUtils.copyInputStreamToFile(photoFile.getInputStream(), new File(filePath));
+		} catch (IOException e) {
+			throw new UnknownCubeException(e);
+		}
+
+		UserPhotoRsp rsp = new UserPhotoRsp();
+		rsp.setUserPhotoPath(savePhotoPath);
+
+		return rsp;
 	}
 
 	@Override

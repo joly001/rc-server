@@ -7,6 +7,7 @@ import com.sharingif.cube.support.service.base.IBaseService;
 import com.zcsoft.rc.api.user.entity.*;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.user.model.entity.User;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -53,6 +54,21 @@ public interface UserService extends IBaseService<User, String> {
      * @param user
      */
     void signOut(User user);
+
+    /**
+     * 用户修改
+     * @param req
+     * @return
+     */
+    UserUpdateRsp update(UserUpdateReq req);
+
+    /**
+     * 用户上传图片
+     * @param photoFile
+     * @param user
+     * @return
+     */
+    UserPhotoRsp userPhoto(MultipartFile photoFile, User user);
 
     /**
      * 施工人员数据收集
