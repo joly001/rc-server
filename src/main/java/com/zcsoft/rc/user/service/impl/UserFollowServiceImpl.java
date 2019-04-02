@@ -77,6 +77,11 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		List<User> userList = userService.getOrganizationId(req.getOrganizationId());
 
 		if(userList == null || userList.isEmpty()) {
+			UserFollow userFollow = new UserFollow();
+			userFollow.setUserId(user.getId());
+			userFollow.setUserFollowId(req.getOrganizationId());
+			userFollow.setFollowType(UserFollow.FOLLOW_TYPE_ORGANIZATION);
+			userFollowDAO.insert(userFollow);
 			return;
 		}
 
