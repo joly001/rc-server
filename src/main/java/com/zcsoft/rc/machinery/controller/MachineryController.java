@@ -36,7 +36,7 @@ public class MachineryController {
 	 * 用户关注机械列表
 	 */
 	@RequestMapping(value="userfollowMachineryList", method= RequestMethod.POST)
-	public MachineryUserFollowListRsp userfollowMachineryList(User user) {
+	public MachineryUserFollowListRsp userfollowMachineryList(@DataContainer User user) {
 		return machineryService.userfollowMachineryList(user);
 	}
 

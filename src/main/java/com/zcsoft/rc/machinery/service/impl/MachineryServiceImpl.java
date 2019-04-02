@@ -63,7 +63,7 @@ public class MachineryServiceImpl extends BaseServiceImpl<Machinery, java.lang.S
 		}
 
 		List<MachineryUserFollowRsp> machineryUserFollowRspList = new ArrayList<>(machineryList.size());
-		machineryUserFollowRspList.forEach(machinery -> {
+		machineryList.forEach(machinery -> {
 			MachineryUserFollowRsp machineryUserFollowRsp = new MachineryUserFollowRsp();
 			BeanUtils.copyProperties(machinery, machineryUserFollowRsp);
 
