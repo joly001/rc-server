@@ -220,7 +220,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(queryUser.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
-		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
+		rsp.setBuilderUserType(convertBuilderUserType(queryUser.getBuilderUserType()));
 
 		return rsp;
 	}
