@@ -4,6 +4,7 @@ package com.zcsoft.rc.user.service.impl;
 import com.sharingif.cube.core.exception.UnknownCubeException;
 import com.sharingif.cube.core.exception.validation.ValidationCubeException;
 import com.sharingif.cube.core.util.DateUtils;
+import com.sharingif.cube.core.util.StringUtils;
 import com.sharingif.cube.core.util.UUIDUtils;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.user.entity.*;
@@ -201,9 +202,13 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		User queryUser = userDAO.queryById(req.getId());
 		verifyIdExistence(queryUser);
 
-		verifyMobileExistence(req.getId(), req.getMobile());
+		if(!StringUtils.isTrimEmpty(req.getMobile())) {
+			verifyMobileExistence(req.getId(), req.getMobile());
+		}
 
-		verifyWristStrapCodeExistence(req.getId(), req.getWristStrapCode());
+		if(!StringUtils.isTrimEmpty(req.getWristStrapCode())) {
+			verifyWristStrapCodeExistence(req.getId(), req.getWristStrapCode());
+		}
 
 		User user = new User();
 		BeanUtils.copyProperties(req, user);
