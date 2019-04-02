@@ -18,7 +18,10 @@ import com.zcsoft.rc.user.service.OrganizationService;
 import com.zcsoft.rc.user.service.UserService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,9 +31,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Service
-public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService, ApplicationContextAware {
 	
 	private UserDAO userDAO;
 
@@ -39,6 +43,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 	private ZcApiService zcApiService;
 	private OrganizationService organizationService;
+	private ApplicationContext applicationContext;
 
 	@Value("${user.token.expire.daily}")
 	public void setUserTokenExpireDaily(int userTokenExpireDaily) {
@@ -60,6 +65,11 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	@Resource
 	public void setOrganizationService(OrganizationService organizationService) {
 		this.organizationService = organizationService;
+	}
+	@Resource
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 
 	@Override
@@ -101,6 +111,10 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		userDAO.updateById(updateUser);
 	}
 
+	private String convertBuilderUserType(String builderUserType) {
+		return applicationContext.getMessage(builderUserType, null, Locale.CHINESE);
+	}
+
 	@Override
 	public UserLoginRsp login(UserLoginReq req) {
 		User user = getByUsername(req.getUsername());
@@ -112,6 +126,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
+		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
 
 		return rsp;
 	}
@@ -127,6 +142,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
+		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
 
 		return rsp;
 	}
@@ -199,7 +215,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(queryUser.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
-		rsp.setBuilderUserType(queryUser.getBuilderUserType());
+		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
 
 		return rsp;
 	}
@@ -235,6 +251,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
+		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
 
 		return rsp;
 	}
