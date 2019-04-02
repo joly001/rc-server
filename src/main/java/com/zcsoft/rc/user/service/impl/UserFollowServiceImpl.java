@@ -4,6 +4,7 @@ package com.zcsoft.rc.user.service.impl;
 import javax.annotation.Resource;
 
 import com.sharingif.cube.core.util.StringUtils;
+import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
 import com.zcsoft.rc.api.user.entity.UserFollowReq;
 import com.zcsoft.rc.api.user.entity.UserMachineryFollowReq;
 import com.zcsoft.rc.api.user.entity.UserMachineryUnFollowReq;
@@ -16,6 +17,7 @@ import com.zcsoft.rc.user.model.entity.UserFollow;
 import com.zcsoft.rc.user.dao.UserFollowDAO;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.user.service.UserFollowService;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -51,6 +53,19 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		userFollowDAO.insert(userFollow);
 	}
 
+	@Transactional
+	protected void follow(String userId, String organizationId, List<User> userList) {
+		UserFollow userFollow = new UserFollow();
+		userFollow.setUserId(userId);
+		userFollow.setUserFollowId(organizationId);
+		userFollow.setFollowType(UserFollow.FOLLOW_TYPE_ORGANIZATION);
+		userFollowDAO.insert(userFollow);
+
+		userList.forEach(queryUser -> {
+			follow(queryUser.getId(), userId, UserFollow.FOLLOW_TYPE_USER);
+		});
+	}
+
 	@Override
 	public void follow(UserFollowReq req, User user) {
 		if(StringUtils.isTrimEmpty(req.getOrganizationId())) {
@@ -65,10 +80,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 			return;
 		}
 
-		userList.forEach(queryUser -> {
-			follow(queryUser.getId(), user.getId(), UserFollow.FOLLOW_TYPE_USER);
-		});
-
+		follow(user.getId(), req.getOrganizationId(), userList);
 	}
 
 	protected void unFollow(String userFollowId, String userId, String followType) {
@@ -80,6 +92,17 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		userFollowDAO.deleteByCondition(userFollow);
 	}
 
+	@Transactional
+	protected void unFollow(String userId, String organizationId) {
+		UserFollow deleteUserFollow = new UserFollow();
+		deleteUserFollow.setUserId(userId);
+		deleteUserFollow.setUserFollowId(organizationId);
+		deleteUserFollow.setFollowType(UserFollow.FOLLOW_TYPE_ORGANIZATION);
+		userFollowDAO.deleteByCondition(deleteUserFollow);
+
+		userFollowDAO.deleteByUserIdOrganizationId(userId, organizationId, UserFollow.FOLLOW_TYPE_USER);
+	}
+
 	@Override
 	public void unFollow(UserUnFollowReq req, User user) {
 		if(StringUtils.isTrimEmpty(req.getOrganizationId())) {
@@ -87,7 +110,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 			return;
 		}
 
-		userFollowDAO.deleteByUserIdOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER);
+		unFollow(user.getId(), req.getOrganizationId());
 	}
 
 	@Override

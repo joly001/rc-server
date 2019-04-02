@@ -4,6 +4,8 @@ package com.zcsoft.rc.machinery.service.impl;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
 import com.zcsoft.rc.api.machinery.entity.MachineryRsp;
+import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowListRsp;
+import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowRsp;
 import com.zcsoft.rc.machinery.dao.MachineryDAO;
 import com.zcsoft.rc.machinery.model.entity.Machinery;
 import com.zcsoft.rc.machinery.service.MachineryService;
@@ -46,6 +48,29 @@ public class MachineryServiceImpl extends BaseServiceImpl<Machinery, java.lang.S
 		});
 
 		rsp.setList(machineryRspList);
+
+		return rsp;
+	}
+
+	@Override
+	public MachineryUserFollowListRsp userfollowMachineryList(User user) {
+		List<Machinery> machineryList = machineryDAO.queryUserMachineryList(user.getId(), UserFollow.FOLLOW_TYPE_MACHINERY);
+
+		MachineryUserFollowListRsp rsp = new MachineryUserFollowListRsp();
+
+		if(machineryList == null) {
+			return rsp;
+		}
+
+		List<MachineryUserFollowRsp> machineryUserFollowRspList = new ArrayList<>(machineryList.size());
+		machineryUserFollowRspList.forEach(machinery -> {
+			MachineryUserFollowRsp machineryUserFollowRsp = new MachineryUserFollowRsp();
+			BeanUtils.copyProperties(machinery, machineryUserFollowRsp);
+
+			machineryUserFollowRspList.add(machineryUserFollowRsp);
+		});
+
+		rsp.setList(machineryUserFollowRspList);
 
 		return rsp;
 	}

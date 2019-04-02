@@ -7,6 +7,8 @@ import com.zcsoft.rc.api.user.entity.OrganizationAllRsp;
 import com.zcsoft.rc.app.constants.Constants;
 import com.zcsoft.rc.user.dao.OrganizationDAO;
 import com.zcsoft.rc.user.model.entity.Organization;
+import com.zcsoft.rc.user.model.entity.User;
+import com.zcsoft.rc.user.model.entity.UserFollow;
 import com.zcsoft.rc.user.service.OrganizationService;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.beans.BeanUtils;
@@ -49,7 +51,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 	}
 
 	@Override
-	public OrganizationAllRsp all() {
+	public OrganizationAllRsp all(User user) {
 		OrganizationAllRsp rootOrganizationAllRsp = new OrganizationAllRsp();
 		rootOrganizationAllRsp.setId(Constants.ROOT_KEY);
 		rootOrganizationAllRsp.setOrgName(Constants.ROOT_KEY);
@@ -57,7 +59,7 @@ public class OrganizationServiceImpl extends BaseServiceImpl<Organization, Strin
 		rootOrganizationAllRsp.setChildOrgList(new ArrayList<>());
 
 
-		List<Organization> organizationList = organizationDAO.queryAll();
+		List<Organization> organizationList = organizationDAO.queryUserFollowOrganizationList(user.getId(), UserFollow.FOLLOW_TYPE_ORGANIZATION);
 
 		if(organizationList == null || organizationList.isEmpty()) {
 			return rootOrganizationAllRsp;
