@@ -210,13 +210,15 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 			verifyWristStrapCodeExistence(req.getId(), req.getWristStrapCode());
 		}
 
-		User user = new User();
-		BeanUtils.copyProperties(req, user);
+		User updateUser = new User();
+		BeanUtils.copyProperties(req, updateUser);
 
-		userDAO.updateById(user);
+		userDAO.updateById(updateUser);
+
+		queryUser = userDAO.queryById(req.getId());
 
 		UserUpdateRsp rsp = new UserUpdateRsp();
-		BeanUtils.copyProperties(req, rsp);
+		BeanUtils.copyProperties(queryUser, rsp);
 
 		Organization organization = organizationService.getById(queryUser.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
