@@ -311,6 +311,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 			UserOrganizationRsp userOrganizationRsp = new UserOrganizationRsp();
 			BeanUtils.copyProperties(queryUser, userOrganizationRsp);
 
+			userOrganizationRsp.setBuilderUserType(convertBuilderUserType(queryUser.getBuilderUserType()));
+
 			userOrganizationRspList.add(userOrganizationRsp);
 		});
 
