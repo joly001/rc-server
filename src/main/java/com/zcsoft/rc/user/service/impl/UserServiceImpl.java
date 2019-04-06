@@ -287,6 +287,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 			UserFollowListRsp userFollowListRsp = new UserFollowListRsp();
 			BeanUtils.copyProperties(queryUser, userFollowListRsp);
 
+			userFollowListRsp.setBuilderUserType(convertBuilderUserType(queryUser.getBuilderUserType()));
+
 			userFollowListRspList.add(userFollowListRsp);
 		});
 		rsp.setList(userFollowListRspList);
