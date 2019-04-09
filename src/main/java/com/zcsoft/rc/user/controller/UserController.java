@@ -90,21 +90,12 @@ public class UserController {
 	}
 
 	/**
-	 * 施工人员数据收集
+	 * 施工人员/司机 数据收集
 	 * @param req
 	 */
-	@RequestMapping(value="collectBuilder", method= RequestMethod.POST)
-	public void collectBuilder(@Valid ZcReq req) {
-		userService.collectBuilder(req);
-	}
-
-	/**
-	 * 司机数据收集
-	 * @param req
-	 */
-	@RequestMapping(value="collectDriver", method= RequestMethod.POST)
-	public void collectDriver(@Valid ZcReq req) {
-		userService.collectDriver(req);
+	@RequestMapping(value="collect", method= RequestMethod.POST)
+	public void collect(@Valid ZcReq req) {
+		userService.collect(req);
 	}
 
 	/**

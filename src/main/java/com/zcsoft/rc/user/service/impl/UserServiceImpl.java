@@ -264,13 +264,8 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	}
 
 	@Override
-	public void collectBuilder(ZcReq req) {
-		zcApiService.collectBuilder(req);
-	}
-
-	@Override
-	public void collectDriver(ZcReq req) {
-		zcApiService.collectDriver(req);
+	public void collect(ZcReq req) {
+		zcApiService.collect(req);
 	}
 
 	@Override
