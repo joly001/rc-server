@@ -77,9 +77,9 @@ public class PersistenceComponentsAutoconfigure {
 	}
 	
 	@Bean(name="dataSourceTransactionManager")
-	public DataSourceTransactionManager createDataSourceTransactionManager(DataSource opayDataSource) {
+	public DataSourceTransactionManager createDataSourceTransactionManager(DataSource dataSource) {
 		DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
-		dataSourceTransactionManager.setDataSource(opayDataSource);
+		dataSourceTransactionManager.setDataSource(dataSource);
 		
 		return dataSourceTransactionManager;
 	}
