@@ -6,16 +6,9 @@ import com.sharingif.cube.persistence.database.pagination.PaginationRepertory;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.http.HttpPaginationCondition;
 import com.zcsoft.rc.api.http.HttpPaginationRepertory;
-import com.zcsoft.rc.api.warning.entity.WorkWarningListReq;
 import com.zcsoft.rc.api.warning.entity.WorkWarningListRsp;
+import com.zcsoft.rc.api.warning.entity.WorkWarningListReq;
 import com.zcsoft.rc.app.constants.Constants;
-import com.zcsoft.rc.machinery.dao.MachineryDAO;
-import com.zcsoft.rc.machinery.model.entity.Machinery;
-import com.zcsoft.rc.mileage.dao.WorkSegmentDAO;
-import com.zcsoft.rc.mileage.model.entity.WorkSegment;
-import com.zcsoft.rc.user.dao.OrganizationDAO;
-import com.zcsoft.rc.user.dao.UserDAO;
-import com.zcsoft.rc.user.model.entity.Organization;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.warning.dao.WorkWarningDAO;
 import com.zcsoft.rc.warning.model.entity.WorkWarning;
@@ -39,7 +32,7 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 	}
 
 	@Override
-	public HttpPaginationRepertory<WorkWarningListReq> list(HttpPaginationCondition<WorkWarningListRsp> req, User user) {
+	public HttpPaginationRepertory<WorkWarningListRsp> list(HttpPaginationCondition<WorkWarningListReq> req, User user) {
 		WorkWarning queryWorkWarning = new WorkWarning();
 		queryWorkWarning.setUserId(user.getId());
 		PaginationCondition<WorkWarning> paginationCondition = new PaginationCondition<>();
@@ -49,7 +42,7 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 
 		PaginationRepertory<WorkWarning> paginationRepertory = workWarningDAO.queryPagination(paginationCondition);
 
-		HttpPaginationRepertory<WorkWarningListReq> httpPaginationRepertory = new HttpPaginationRepertory<>(
+		HttpPaginationRepertory<WorkWarningListRsp> httpPaginationRepertory = new HttpPaginationRepertory<>(
 				paginationRepertory.getTotalCount()
 				,null
 				,req
@@ -59,12 +52,12 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 			return httpPaginationRepertory;
 		}
 
-		List<WorkWarningListReq> workSegmentListRspList = new ArrayList<>(paginationRepertory.getPageItems().size());
+		List<WorkWarningListRsp> workSegmentListRspList = new ArrayList<>(paginationRepertory.getPageItems().size());
 		paginationRepertory.getPageItems().forEach(workWarning -> {
-			WorkWarningListReq workWarningListReq = new WorkWarningListReq();
-			BeanUtils.copyProperties(workWarning, workWarningListReq);
+			WorkWarningListRsp workWarningListRsp = new WorkWarningListRsp();
+			BeanUtils.copyProperties(workWarning, workWarningListRsp);
 
-			workSegmentListRspList.add(workWarningListReq);
+			workSegmentListRspList.add(workWarningListRsp);
 		});
 		httpPaginationRepertory.setPageItems(workSegmentListRspList);
 

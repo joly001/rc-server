@@ -4,8 +4,8 @@ package com.zcsoft.rc.warning.controller;
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
 import com.zcsoft.rc.api.http.HttpPaginationCondition;
 import com.zcsoft.rc.api.http.HttpPaginationRepertory;
-import com.zcsoft.rc.api.warning.entity.WorkWarningListReq;
 import com.zcsoft.rc.api.warning.entity.WorkWarningListRsp;
+import com.zcsoft.rc.api.warning.entity.WorkWarningListReq;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.warning.service.WorkWarningService;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class WorkWarningController {
 	 * 警告分页查询
 	 */
 	@RequestMapping(value="list", method= RequestMethod.POST)
-	public HttpPaginationRepertory<WorkWarningListReq> list(@Valid HttpPaginationCondition<WorkWarningListRsp> req, @DataContainer User user) {
+	public HttpPaginationRepertory<WorkWarningListRsp> list(@Valid HttpPaginationCondition<WorkWarningListReq> req, @DataContainer User user) {
 		return workWarningService.list(req, user);
 	}
 	
