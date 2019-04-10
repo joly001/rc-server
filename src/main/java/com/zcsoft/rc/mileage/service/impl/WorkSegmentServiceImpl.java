@@ -41,6 +41,7 @@ public class WorkSegmentServiceImpl extends BaseServiceImpl<WorkSegment, String>
 		Date beginDateTime = Date.from(beginInstant);
 		Date endDateTime = Date.from(endInstant);
 
+
 		List<WorkSegment> workSegmentList = workSegmentDAO.queryListByWorkDate(beginDateTime, endDateTime);
 
 		WorkSegmentTodayListRsp rsp = new WorkSegmentTodayListRsp();
