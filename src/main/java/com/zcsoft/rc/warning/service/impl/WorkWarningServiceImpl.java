@@ -20,9 +20,12 @@ import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.warning.dao.WorkWarningDAO;
 import com.zcsoft.rc.warning.model.entity.WorkWarning;
 import com.zcsoft.rc.warning.service.WorkWarningService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String> implements WorkWarningService {
@@ -46,6 +49,26 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 
 		PaginationRepertory<WorkWarning> paginationRepertory = workWarningDAO.queryPagination(paginationCondition);
 
-		return null;
+		HttpPaginationRepertory<WorkWarningListReq> httpPaginationRepertory = new HttpPaginationRepertory<>(
+				paginationRepertory.getTotalCount()
+				,null
+				,req
+		);
+
+		if(paginationRepertory.getPageItems() == null || paginationRepertory.getPageItems().isEmpty()) {
+			return httpPaginationRepertory;
+		}
+
+		List<WorkWarningListReq> workSegmentListRspList = new ArrayList<>(paginationRepertory.getPageItems().size());
+		paginationRepertory.getPageItems().forEach(workWarning -> {
+			WorkWarningListReq workWarningListReq = new WorkWarningListReq();
+			BeanUtils.copyProperties(workWarning, workWarningListReq);
+
+			workSegmentListRspList.add(workWarningListReq);
+		});
+		httpPaginationRepertory.setPageItems(workSegmentListRspList);
+
+		return httpPaginationRepertory;
+
 	}
 }
