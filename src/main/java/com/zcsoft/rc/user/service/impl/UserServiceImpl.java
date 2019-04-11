@@ -67,7 +67,6 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public void setOrganizationService(OrganizationService organizationService) {
 		this.organizationService = organizationService;
 	}
-	@Resource
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.applicationContext = applicationContext;
