@@ -39,25 +39,6 @@ public class PasswordAuthenticationHandler extends TextEncryptorPasswordAuthenti
 		
 		passwordAuthentication(queryUser.getPassword(), user);
 
-
-		fillInUser(user, queryUser);
 	}
-	
-	/**
-	 * 填充用户属性
-	 * @param user
-	 * @param queryUser
-	 */
-	protected void fillInUser(User user, User queryUser) {
-		user.setId(queryUser.getId());
-		user.setNick(queryUser.getNick());
-		user.setMobilePrefix(queryUser.getMobilePrefix());
-		user.setMobile(queryUser.getMobile());
-		user.setUserType(queryUser.getUserType());
-		user.setWristStrapCode(queryUser.getWristStrapCode());
-		user.setStatus(queryUser.getStatus());
 
-	}
-	
-	
 }

@@ -5,6 +5,7 @@ import com.sharingif.cube.core.handler.chain.HandlerMethodContent;
 import com.sharingif.cube.core.handler.chain.command.AbstractHandlerMethodCommand;
 import com.zcsoft.rc.api.user.entity.UserLoginReq;
 import com.zcsoft.rc.user.model.entity.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,11 +15,10 @@ public class UserConvertToUserLoginReqCommand extends AbstractHandlerMethodComma
     public void execute(HandlerMethodContent content) throws CubeException {
         User user = content.getObject(User.class);
 
-        UserLoginReq userLoginReq = new UserLoginReq();
-        userLoginReq.setUsername(user.getUsername());
-        userLoginReq.setPassword(user.getPassword());
+        UserLoginReq req = new UserLoginReq();
+        BeanUtils.copyProperties(user, req);
 
-        Object[] args = {userLoginReq};
+        Object[] args = {req};
 
         content.setArgs(args);
     }

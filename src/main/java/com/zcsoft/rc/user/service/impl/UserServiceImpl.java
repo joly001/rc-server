@@ -97,7 +97,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		return userDAO.queryList(queryUser);
 	}
 
-	protected void updateUserToken(User user) {
+	protected void updateUserTokenMessagingToken(User user, String messagingToken) {
 		String loginToken = UUIDUtils.generateUUID();
 		Date loginTokenExpiratTime = DateUtils.addDateDay(new Date(), userTokenExpireDaily);
 
@@ -108,6 +108,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		updateUser.setId(user.getId());
 		updateUser.setLoginToken(loginToken);
 		updateUser.setLoginTokenExpiratTime(loginTokenExpiratTime);
+		updateUser.setMessagingToken(messagingToken);
 
 		userDAO.updateById(updateUser);
 	}
@@ -120,7 +121,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public UserLoginRsp login(UserLoginReq req) {
 		User user = getByUsername(req.getUsername());
 
-		updateUserToken(user);
+		updateUserTokenMessagingToken(user, req.getMessagingToken());
 
 		UserLoginRsp rsp = new UserLoginRsp();
 		BeanUtils.copyProperties(user, rsp);
@@ -136,7 +137,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 	public UserLoginRsp tokenLogin(UserTokenLoginReq req) {
 		User user = getByToken(req.getLoginToken());
 
-		updateUserToken(user);
+		updateUserTokenMessagingToken(user, null);
 
 		UserLoginRsp rsp = new UserLoginRsp();
 		BeanUtils.copyProperties(user, rsp);
