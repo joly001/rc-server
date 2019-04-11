@@ -108,6 +108,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		updateUser.setLoginToken(loginToken);
 		updateUser.setLoginTokenExpiratTime(loginTokenExpiratTime);
 		updateUser.setMessagingToken(messagingToken);
+		updateUser.setOperatingSystem(operatingSystem);
 
 		userDAO.updateById(updateUser);
 	}
