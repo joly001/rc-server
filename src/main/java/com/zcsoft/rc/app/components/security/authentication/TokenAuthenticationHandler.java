@@ -30,7 +30,24 @@ public class TokenAuthenticationHandler extends TextEncryptorPasswordAuthenticat
 		if(null == tokenUser){
 			throw new ValidationCubeException(ErrorConstants.USER_LOGIN_AT_OTHER_DEVICE);
 		}
-		
+
+		fillInUser(user, tokenUser);
+	}
+
+	/**
+	 * 填充用户属性
+	 * @param user
+	 * @param queryUser
+	 */
+	protected void fillInUser(User user, User queryUser) {
+		user.setId(queryUser.getId());
+		user.setNick(queryUser.getNick());
+		user.setMobilePrefix(queryUser.getMobilePrefix());
+		user.setMobile(queryUser.getMobile());
+		user.setUserType(queryUser.getUserType());
+		user.setWristStrapCode(queryUser.getWristStrapCode());
+		user.setStatus(queryUser.getStatus());
+
 	}
 	
 	
