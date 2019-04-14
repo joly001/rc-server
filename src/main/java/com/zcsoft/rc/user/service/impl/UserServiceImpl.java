@@ -213,6 +213,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		User updateUser = new User();
 		BeanUtils.copyProperties(req, updateUser);
+		if(!StringUtils.isTrimEmpty(req.getMobile())) {
+			updateUser.setUsername(req.getMobile());
+		}
 
 		userDAO.updateById(updateUser);
 
