@@ -1,0 +1,111 @@
+html, body, #map {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+ul,li{ padding:0;margin:0;list-style:none}
+#viewEntire {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/viewEntire.png);
+    position:absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#zoomIn {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/zoomIn.png);
+    position:absolute;
+    top: 66px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#zoomOut {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/zoomOut.png);
+    position:absolute;
+    top: 102px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#pan {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/pan.png);
+    position:absolute;
+    top: 138px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#line {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/measuredistance.png);
+    position:absolute;
+    top: 174px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#polygon {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/measurearea.png);
+    position:absolute;
+    top: 210px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+#clean {
+    background-image:url(http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/javascriptForMaps/img/eraser.png);
+    position:absolute;
+    top: 246px;
+    left: 30px;
+    z-index: 2000;
+    width:32px;
+    height:32px;
+}
+
+.nav_menu{
+    position: absolute;
+    width: 116px;
+    height: 36px;
+    top: 64.5px;
+    left: 133px;
+    background: rgba(25,35,50,1);
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.nav{
+    height: 38px;
+}
+
+#navbox{
+    background:rgba(25,35,50,1);
+    border-radius:5px;
+}
+
+.arr {
+    width: 18px;
+}
+
+.arrUp {
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-bottom-color: #ccc;
+    cursor: pointer;
+}
+
+.arrDown {
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-top-color: #ccc;
+    margin-top: 3px;
+    cursor: pointer;
+}

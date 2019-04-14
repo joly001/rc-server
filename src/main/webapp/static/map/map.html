@@ -1,0 +1,286 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  minimum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta charset="UTF-8">
+    <title></title>
+      <link type="text/css" rel="stylesheet" href="css/map.css">
+      <link type="text/css" rel="stylesheet" href="css/compoentsBase.css">
+      <link href="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol.css" rel="stylesheet">
+      <script src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol-debug.js"></script>
+      <script type="text/javascript" src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/iclient9-openlayers.js"></script>
+      <script type="text/javascript" src="lib/jquery-1.7.1.js"></script>
+      <script src="lib/axios.min.js"></script>
+      <script src="js/jquery.jqtransform.js"></script>
+      <script src="js/datagrid.js"></script>
+      <script src="js/pageConfig.js"></script>
+      <script type="text/javascript" src="js/map.js"></script>
+      <script type="text/javascript" src="js/MessageControl.js"></script>
+      <script type="text/javascript" src="js/selectPlugin.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+      <script type="text/javascript">
+          var firstData = {
+              "_data": {
+              "list": [
+                  {
+                      "id": "6DE42C33B4AC478098AAE22A5BEF4055",
+                      "mileageSegmentName": "k457-k457+200",
+                      "startMileageName": "k457",
+                      "endMileageName": "k457+200",
+                      "workingCycle": 24
+                  },
+                  {
+                      "id": "9FC54B8D85154EA5899D5735D0F362E1",
+                      "mileageSegmentName": "k456+700-k457",
+                      "startMileageName": "k456+700",
+                      "endMileageName": "k457",
+                      "workingCycle": 23
+                  }
+              ]
+          },
+              "_tranStatus": true
+          }
+
+          var k457_t = {
+              "_data": {
+                  "list": [
+                      {
+                          "id": "ABD0CA315D214517AECF88DAD406164E",
+                          "workSegmentName": "k456+700-k456+800",
+                          "mileageSegmentId": "9FC54B8D85154EA5899D5735D0F362E1",
+                          "mileageSegmentName": "k456+700-k457",
+                          "startMileageName": "k456+700",
+                          "endMileageName": "k456+800",
+                          "startLongitude": 86.1942852526,
+                          "startLatitude": 41.7433673974,
+                          "endLongitude": 86.1926819266,
+                          "endLatitude": 41.7447355519,
+                          "workType": "00",
+                          "workDate": 1514736000000,
+                          "safetyProtectionPersonnel": 7,
+                          "workPersonnel": 8
+                      },
+                      {
+                          "id": "ED5AB7C14EC543C0A26F91477A1A3001",
+                          "workSegmentName": "k456+800-k456+900",
+                          "mileageSegmentId": "9FC54B8D85154EA5899D5735D0F362E1",
+                          "mileageSegmentName": "k456+700-k457",
+                          "startMileageName": "k456+800",
+                          "endMileageName": "k456+900",
+                          "startLongitude": 86.1934747154,
+                          "startLatitude": 41.7440590472,
+                          "endLongitude": 86.1918894015,
+                          "endLatitude": 41.7454118298,
+                          "workType": "01",
+                          "workDate": 1514736000000,
+                          "safetyProtectionPersonnel": 8,
+                          "workPersonnel": 9
+                      },
+                      {
+                          "id": "239C9E0810DE4FC4B1B66DAF93981B10",
+                          "workSegmentName": "k456+900-k457",
+                          "mileageSegmentId": "9FC54B8D85154EA5899D5735D0F362E1",
+                          "mileageSegmentName": "k456+700-k457",
+                          "startMileageName": "k456+900",
+                          "endMileageName": "k457",
+                          "startLongitude": 86.1926819266,
+                          "startLatitude": 41.7447355519,
+                          "endLongitude": 86.1910964106,
+                          "endLatitude": 41.7460884217,
+                          "workType": "01",
+                          "workDate": 1514736000000,
+                          "safetyProtectionPersonnel": 8,
+                          "workPersonnel": 9
+                      }
+                  ]
+              },
+              "_tranStatus": true
+          }
+
+          var k457 = {
+              "_data": {
+                  "list": [
+                      {
+                          "id": "7F949D820D4744CE9F0A6E9E3988E764",
+                          "workSegmentName": "k457-k457+100",
+                          "mileageSegmentId": "6DE42C33B4AC478098AAE22A5BEF4055",
+                          "mileageSegmentName": "k457-k457+200",
+                          "startMileageName": "k457",
+                          "endMileageName": "k457+100",
+                          "startLongitude": 86.1918894015,
+                          "startLatitude": 41.7454118298,
+                          "endLongitude": 86.1903172599,
+                          "endLatitude": 41.7467532048,
+                          "workType": "00",
+                          "workDate": 1514736000000,
+                          "safetyProtectionPersonnel": 7,
+                          "workPersonnel": 8
+                      },
+                      {
+                          "id": "6925A3D584784465A5D1D7EB00C192A2",
+                          "workSegmentName": "k457+100-k457+200",
+                          "mileageSegmentId": "6DE42C33B4AC478098AAE22A5BEF4055",
+                          "mileageSegmentName": "k457-k457+200",
+                          "startMileageName": "k457+100",
+                          "endMileageName": "k457+200",
+                          "startLongitude": 86.1910964106,
+                          "startLatitude": 41.7460884217,
+                          "endLongitude": 86.1895272128,
+                          "endLatitude": 41.747427285,
+                          "workType": "00",
+                          "workDate": 1514736000000,
+                          "safetyProtectionPersonnel": 7,
+                          "workPersonnel": 8
+                      }
+                  ]
+              },
+              "_tranStatus": true
+          }
+
+          var getUrl = {
+                mileageSegment:"http://47.93.254.21:9091/rc-bms/user/login"
+            }
+
+      </script>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div style="position:absolute;height:220px;width:230px;background:rgba(255,255,255,0.6);bottom: 249px;right:10px;border-radius:5px;">
+        <p style="text-align: center;height:16px;font-size:16px;font-family:MicrosoftYaHei;font-weight:400;color:rgba(0,0,0,1);">图层注释</p>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/warningline.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">警戒线</span>
+            </div>
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/107.png" style="width: 18px;height: 18px;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">安全员</span>
+            </div>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/brown.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">线缆</span>
+            </div>
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/103.png" style="width: 18px;height: 18px;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">防护员</span>
+            </div>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/yellow.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">线缆</span>
+            </div>
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/104.png" style="width: 18px;height: 18px;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">作业负责人</span>
+            </div>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/100.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">机车</span>
+            </div>
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/105.png" style="width: 18px;height: 18px;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">监理</span>
+            </div>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/101.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">列车</span>
+            </div>
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/106.png" style="width: 18px;height: 18px;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">其他人员</span>
+            </div>
+
+            <div style="width: 115px;float: left;height: 13px;margin-top: 10px;">
+                <img src="images/102.png" style="width: 18px;height: 100%;margin-left: 8px;margin-right: 5px;" /><span style="font-size: 14px;">作业人员</span>
+            </div>
+    </div>
+    <div class="nav_menu">
+        <div class="nav">
+            <div class="list" id="navlist">
+                <ul id="navfouce">
+                    <li><a style="line-height: 38px;margin-left: 10px;float: left;">作业区间</a>
+                        <div class="arr" style="float: left;margin-left: 10px;margin-top: 9px;">
+                            <div class="arrUp"></div>
+                            <div class="arrDown"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box" id="navbox" style="width: 208px;height:0px;opacity:0;overflow:hidden;margin-top: 5px;">
+                <div class="cont" style="display:none;">
+                    <ul class="sublist clearfix">
+                        <li>
+                            <p class="mcate-item-hd" style="text-align: center;"><span>作业区间信息</span></p>
+                            <div class="mcate-item-bd" style="text-align: left;">
+
+                                <ul id="workingInterval">
+                                    <li style="overflow: auto;margin-top: 10px">
+                                        <div class="liDiv" style="overflow: auto;" onclick="showSonDiv('k10Area')">
+                                            <a style="float: left;margin-left: 5px;">K10-K60作业区间</a>
+                                            <div class="arr" style="float: left;margin-left: 10px;">
+                                                <div class="arrUp"></div>
+                                                <div class="arrDown"></div>
+                                            </div>
+                                        </div>
+                                        <div style="display:none;height: 130px;text-align: center;" id ="k10Area">
+                                               <ul>
+                                                   <li style="margin-top: 10px;">
+                                                       <a><u>K1-K2作业面</u></a>
+                                                   </li>
+                                                   <li style="margin-top: 10px;">
+                                                       <a><u>K2-K3作业面</u></a>
+                                                   </li>
+                                                   <li style="margin-top: 10px;">
+                                                       <a><u>K4-K5作业面</u></a>
+                                                   </li>
+                                                   <li style="margin-top: 10px;">
+                                                       <a><u>K5-K6作业面</u></a>
+                                                   </li>
+                                               </ul>
+                                        </div>
+                                    </li>
+                                    <li style="overflow: auto;margin-top: 10px">
+                                        <a style="float: left;margin-left: 5px;">K10-K120作业区间</a>
+                                        <div class="arr" style="float: left;margin-left: 10px;">
+                                            <div class="arrUp"></div>
+                                            <div class="arrDown"></div>
+                                        </div>
+                                    </li>
+                                    <li style="overflow: auto;margin-top: 10px">
+                                        <a style="float: left;margin-left: 5px;">K120-K160作业区间</a>
+                                        <div class="arr" style="float: left;margin-left: 10px;">
+                                            <div class="arrUp"></div>
+                                            <div class="arrDown"></div>
+                                        </div>
+                                    </li>
+                                    <li style="overflow: auto;margin-top: 10px">
+                                        <a style="float: left;margin-left: 5px;">K160-K220作业区间</a>
+                                        <div class="arr" style="float: left;margin-left: 10px;">
+                                            <div class="arrUp"></div>
+                                            <div class="arrDown"></div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div style="width: 100%;position: absolute;bottom:0;">
+        <div style="width: 60%;height: 232px;background-color: #4680d9;float: left;">
+            <div style="border-radius:10px;background-color: #FFFFFF;margin-top: 10px;margin-bottom: 10px;margin-left: 10px;margin-right: 5px;">
+                <p style="text-align: center;font-size:16px;font-family:MicrosoftYaHei-Bold;font-weight:bold;color:rgba(0,0,0,1);">触警信息显示区</p>
+                <div id="list1" style="height: 165px;">
+
+                </div>
+            </div>
+
+        </div>
+        <div style="width: 40%;height: 232px;background-color: #4680d9;float: right;">
+            <div style="border-radius:10px;background-color: #FFFFFF;border-radius:10px;margin-top: 10px;margin-bottom: 10px;margin-left: 5px;margin-right: 10px;">
+                <p style="text-align: center;font-size:16px;font-family:MicrosoftYaHei-Bold;font-weight:bold;color:rgba(0,0,0,1);">列车接近通知</p>
+                <div id="list2">
+
+                </div>
+            </div>
+        </div>
+  </div>
+  </body>
+</html>
