@@ -95,6 +95,7 @@ var SelectPlugin = (function(){
 
         for(var i=0;i<length;i++){
             var id = options.data[i].id?options.data[i].id:options.data[i][options.customKeyValue.id];
+            $("#"+id).data(options.data[i]);
             $("#"+id).click(function(){
                 options.fn(this);
             })

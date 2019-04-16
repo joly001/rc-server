@@ -1,5 +1,5 @@
 var url = "http://47.94.11.219:8090/iserver/services/map-KUA/rest/maps/东站333_1@4326",trainMap,
-    messageControl,loadSon1,loadSon2;
+    messageControl,loadSon1,loadSon2,localPage,loadSon,fatherDivH,list1H,list1TbodyH;
 
 $(function(){
     init();

@@ -14,7 +14,6 @@ var MessageControl = (function(){
 
 
         this.currentWebSocket.onmessage = function (evt) {
-            console.log(JSON.parse(evt.data));
             try{
                 options.onmessage((JSON.parse(evt.data)));
             }catch (e){

@@ -10,14 +10,19 @@ function mercatorTolonlat(mercator){
 }
 
 var TrainMap = (function(){
-    var map, layer, view, options,prjCoordSys,epsgcode,vectorLayer,sourceVector;
+    var map, layer, view, options,prjCoordSys,epsgcode,vectorLayer,sourceVector,overlay ;
     var lon=0,lat=0,zoomlevel=2,initZoomToScale;
+    var waringObj = {};
+
     function _(optionsObj){
         var originResult =optionsObj.originResult;
         var visableResolution = [];
         var attrib = 'Map data &copy; 2013 Lantm?teriet, Imagery &copy; 2013 SuperMap';
         var url = optionsObj.url;
         var projection = 'EPSG:3857';
+        this.container = document.getElementById('popup');
+        this.content = document.getElementById('popup-content');
+        this.closer = $('#popup-closer');
         options = {};
         options.maxZoom = 18;
         options.minZoom = 0;
@@ -86,6 +91,28 @@ var TrainMap = (function(){
 
         map.addLayer(layer);
         map.addLayer(vectorLayer);
+
+
+
+
+        /*********************显示弹出层**************************/
+        var container = document.getElementById("popup");
+        var content = document.getElementById("popup-content");
+        var popupCloser = document.getElementById("popup-closer");
+
+        overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+            element: container,
+            autoPan: true,
+            autoPanAnimation: {
+                duration: 250
+            }
+        }));
+
+        popupCloser.addEventListener('click',function(){
+            overlay.setPosition(undefined);
+        });
+
+
     }
 
     _.prototype.getMap =function(){
@@ -95,14 +122,21 @@ var TrainMap = (function(){
 
         var f = sourceVector.getFeatureById(arr.properties.id);
         if(f){
-            //f.getGeometry().setCoordinates(mercatorTolonlat(arr.geometry.coordinates));
             f.getGeometry().setCoordinates(arr.geometry.coordinates);
+            if(arr.properties.warningStatus == "true"){
+                var waringData = $.parseJSON(arr.properties.warning);
+                this.content.innerHTML = waringData.waringContent ;
+                overlay.setPosition(arr.geometry.coordinates);
+                map.addOverlay(overlay);
+                waringObj[arr.properties.id] = true
+            }else if((arr.properties.warningStatus != "true") && waringObj[arr.properties.id]){
+                overlay.setPosition(undefined);
+                waringObj[arr.properties.id] = false;
+            }
         }else{
-            f= addPoint(arr)
+            f= addPoint(arr,this)
             sourceVector.addFeature(f);
         }
-        console.log(f);
-        console.log(f.getGeometry());
 
     }
 
@@ -116,14 +150,19 @@ var TrainMap = (function(){
         });
     }
 
-     function addPoint (param){
+     function addPoint (param,o){
           var f =  new ol.Feature({
-             // geometry:new ol.geom.Point(mercatorTolonlat(param.geometry.coordinates)),
               geometry:new ol.geom.Point(param.geometry.coordinates),
               featuretype:'point'
           });
           f.setId(param.properties.id);
           f.setStyle(styleFunction(param.properties.type));
+          if(param.properties.warningStatus == "true"){
+              var waringData = $.parseJSON(param.properties.warning);
+              o.content.innerHTML = waringData.waringContent ;
+              overlay.setPosition(param.geometry.coordinates);
+              map.addOverlay(overlay);
+          }
           return f;
       }
 
