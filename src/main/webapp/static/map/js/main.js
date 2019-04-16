@@ -32,3 +32,14 @@ function loadMessage() {
         }
     });
 }
+
+function minpoint(a,b){
+    var x=(a[0]+b[0])/2;
+    var y=(a[1]+b[1])/2;
+    return [x,y];
+}
+
+function changeMapArea(startLongitude,startLatitude,endLongitude,endLatitude) {
+    var mapArea = minpoint([startLongitude,startLatitude],[endLongitude,endLatitude]);
+    trainMap.moveTo(mapArea)
+}
