@@ -5,7 +5,6 @@ function mercatorTolonlat(mercator){
     y= 180/Math.PI*(2*Math.atan(Math.exp(y*Math.PI/180))-Math.PI/2);
     lonlat.x = x;
     lonlat.y = y;
-    console.log("X",x,"Y",y);
     return [x,y];
 }
 
@@ -13,7 +12,7 @@ var TrainMap = (function(){
     var map, layer, view, options,prjCoordSys,epsgcode,vectorLayer,sourceVector,overlay ;
     var lon=0,lat=0,zoomlevel=2,initZoomToScale;
     var waringObj = {};
-
+    var peopleSet = {};
     function _(optionsObj){
         var originResult =optionsObj.originResult;
         var visableResolution = [];
@@ -119,11 +118,10 @@ var TrainMap = (function(){
         return map;
     }
     _.prototype.addPoints = function(arr){
-
         var f = sourceVector.getFeatureById(arr.properties.id);
         if(f){
             f.getGeometry().setCoordinates(arr.geometry.coordinates);
-            if(arr.properties.warningStatus == "true"){
+            if(arr.properties.warningStatus == "true" && $("#t"+arr.properties.type).is(':checked')){
                 var waringData = $.parseJSON(arr.properties.warning);
                 this.content.innerHTML = waringData.waringContent ;
                 overlay.setPosition(arr.geometry.coordinates);
@@ -150,14 +148,47 @@ var TrainMap = (function(){
         });
     }
 
+
+    _.prototype.showForType = function(type,isShow){
+            var features = sourceVector.getFeatures();
+            for(var i=0;i<features.length;i++){
+                   var f =  features[i];
+                   var id = f.getId();
+                   var fType = f.get("showType")
+                   if(fType == type && isShow){
+                       //显示
+                       f.setStyle(styleFunction(type));
+                   }else if(fType == type){
+                       //隐藏
+                       f.setStyle(new ol.style.Style({
+                           zIndex:0
+                       }));
+
+                       if(waringObj[id]){
+                           overlay.setPosition(undefined);
+                           waringObj[id] = false;
+                       }
+                   }
+
+            }
+    }
      function addPoint (param,o){
           var f =  new ol.Feature({
               geometry:new ol.geom.Point(param.geometry.coordinates),
               featuretype:'point'
           });
           f.setId(param.properties.id);
+          f.set("showType",param.properties.type);
+          if($("#t"+param.properties.type).is(':checked')){
+              f.setStyle(styleFunction(param.properties.type));
+          }else{
+              f.setStyle(new ol.style.Style({
+                  // 设置一个标识
+                  zIndex:0
+              }));
+          }
           f.setStyle(styleFunction(param.properties.type));
-          if(param.properties.warningStatus == "true"){
+          if((param.properties.warningStatus == "true") && $("#t"+param.properties.type).is(':checked')){
               var waringData = $.parseJSON(param.properties.warning);
               o.content.innerHTML = waringData.waringContent ;
               overlay.setPosition(param.geometry.coordinates);
@@ -187,36 +218,10 @@ var TrainMap = (function(){
             // 设置一个标识
             image: new ol.style.Icon({
                 src: imgSrc,
-
-                // 这个是相当于是进行切图了
-                // size: [50,50],
-                // 注意这个，竟然是比例 左上[0,0]  左下[0,1]  右下[1，1]
                 anchor: [0.5, 0.5],
-                // 这个直接就可以控制大小了
                 scale: 0.15,
-                // 开启转向
                 rotateWithView: true,
-                // rotation: ele.rotation||3.14 * Math.random(),
-            }),
-            /*text: new ol.style.Text({
-                // 对其方式
-                textAlign: 'center',
-                // 基准线
-                textBaseline: 'middle',
-                offsetY: -25,
-                // 文字样式
-                font: 'normal 16px 黑体',
-                // 文本内容
-                text: `name:admin`,
-                // 文本填充样式
-                fill: new ol.style.Fill({
-                    color: 'rgba(255,255,255,1)'
-                }),
-                padding: [5, 5, 5, 5],
-                backgroundFill: new ol.style.Fill({
-                    color: 'rgba(0,0,0,0.6)'
-                })
-            })*/
+            })
         })
 
     }
