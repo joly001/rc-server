@@ -2,6 +2,7 @@ package com.zcsoft.rc.machinery.controller;
 
 
 import com.sharingif.cube.core.handler.bind.annotation.DataContainer;
+import com.zcsoft.rc.api.machinery.entity.MachineryListReq;
 import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
 import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowListRsp;
 import com.zcsoft.rc.machinery.service.MachineryService;
@@ -28,7 +29,7 @@ public class MachineryController {
 	 * 查询机械列表，包含用户关注标志
 	 */
 	@RequestMapping(value="followList", method= RequestMethod.POST)
-	public MachineryListRsp followList(@DataContainer User user) {
+	public MachineryListRsp followList(MachineryListReq req, @DataContainer User user) {
 		return machineryService.followList(user);
 	}
 

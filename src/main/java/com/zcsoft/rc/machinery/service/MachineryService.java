@@ -2,6 +2,7 @@ package com.zcsoft.rc.machinery.service;
 
 
 import com.sharingif.cube.support.service.base.IBaseService;
+import com.zcsoft.rc.api.machinery.entity.MachineryListReq;
 import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
 import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowListRsp;
 import com.zcsoft.rc.machinery.model.entity.Machinery;
@@ -12,10 +13,11 @@ public interface MachineryService extends IBaseService<Machinery, java.lang.Stri
 
     /**
      * 查询机械列表，包含用户关注标志
+     * @param req
      * @param user
      * @return
      */
-    MachineryListRsp followList(User user);
+    MachineryListRsp followList(MachineryListReq req, User user);
 
     /**
      * 用户关注机械列表

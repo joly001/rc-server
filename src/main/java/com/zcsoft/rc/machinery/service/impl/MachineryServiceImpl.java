@@ -2,10 +2,7 @@ package com.zcsoft.rc.machinery.service.impl;
 
 
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
-import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
-import com.zcsoft.rc.api.machinery.entity.MachineryRsp;
-import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowListRsp;
-import com.zcsoft.rc.api.machinery.entity.MachineryUserFollowRsp;
+import com.zcsoft.rc.api.machinery.entity.*;
 import com.zcsoft.rc.machinery.dao.MachineryDAO;
 import com.zcsoft.rc.machinery.model.entity.Machinery;
 import com.zcsoft.rc.machinery.service.MachineryService;
@@ -30,8 +27,8 @@ public class MachineryServiceImpl extends BaseServiceImpl<Machinery, java.lang.S
 	}
 
 	@Override
-	public MachineryListRsp followList(User user) {
-		List<Machinery> machineryList = machineryDAO.queryUserFollowList(user.getId(), UserFollow.FOLLOW_TYPE_MACHINERY);
+	public MachineryListRsp followList(MachineryListReq req, User user) {
+		List<Machinery> machineryList = machineryDAO.queryUserFollowList(user.getId(), UserFollow.FOLLOW_TYPE_MACHINERY, req.getNick());
 
 		MachineryListRsp rsp = new MachineryListRsp();
 

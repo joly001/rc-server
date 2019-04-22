@@ -297,7 +297,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 	@Override
 	public UserOrganizationListRsp userOrganization(UserOrganizationReq req, User user) {
-		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER);
+		List<User> userList = userDAO.queryUserFollowListByOrganizationId(user.getId(), req.getOrganizationId(), UserFollow.FOLLOW_TYPE_USER, req.getNick());
 
 		UserOrganizationListRsp rsp = new UserOrganizationListRsp();
 
