@@ -113,8 +113,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		if(StringUtils.isTrimEmpty(req.getOrganizationId())) {
 			unFollow(req.getUserFollowId(), user.getId(), UserFollow.FOLLOW_TYPE_USER);
 
-			UserFollow userFollow = userFollowDAO.queryById(req.getUserFollowId());
-			User queryUser = userService.getById(userFollow.getUserId());
+			User queryUser = userService.getById(req.getUserFollowId());
 			String organizationId = queryUser.getOrganizationId();
 			List<UserFollow> userFollowList = userFollowDAO.queryListByUserIdOrganizationId(user.getId(), organizationId);
 			if(userFollowList == null || userFollowList.isEmpty()) {

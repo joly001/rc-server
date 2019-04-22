@@ -30,7 +30,7 @@ public class MachineryController {
 	 */
 	@RequestMapping(value="followList", method= RequestMethod.POST)
 	public MachineryListRsp followList(MachineryListReq req, @DataContainer User user) {
-		return machineryService.followList(user);
+		return machineryService.followList(req, user);
 	}
 
 	/**
