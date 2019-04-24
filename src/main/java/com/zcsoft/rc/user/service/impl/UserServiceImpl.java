@@ -9,6 +9,7 @@ import com.sharingif.cube.core.util.UUIDUtils;
 import com.sharingif.cube.support.service.base.impl.BaseServiceImpl;
 import com.zcsoft.rc.api.user.entity.*;
 import com.zcsoft.rc.app.constants.ErrorConstants;
+import com.zcsoft.rc.app.constants.PatternConstants;
 import com.zcsoft.rc.collectors.api.zc.entity.ZcReq;
 import com.zcsoft.rc.collectors.api.zc.service.ZcApiService;
 import com.zcsoft.rc.user.dao.UserDAO;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User, String> implements UserService, ApplicationContextAware {
@@ -204,6 +206,9 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 		verifyIdExistence(queryUser);
 
 		if(!StringUtils.isTrimEmpty(req.getMobile())) {
+			if(!Pattern.matches(PatternConstants.REGEX_MOBILE, req.getMobile())){
+				throw new ValidationCubeException(ErrorConstants.USER_MOBILE_FORMAT_ERROR);
+			}
 			verifyMobileExistence(req.getId(), req.getMobile());
 		}
 

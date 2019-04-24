@@ -15,6 +15,10 @@ public interface ErrorConstants {
      */
     String USER_WRISTSTRAPCODE_ALREADY_EXIST = "003002";
     /**
+     * 手机格式错误
+     */
+    String USER_MOBILE_FORMAT_ERROR = "003003";
+    /**
      * 用户不存在
      */
     String USER_NOT_EXIST = "003004";
