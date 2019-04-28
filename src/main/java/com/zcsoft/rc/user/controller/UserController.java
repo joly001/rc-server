@@ -65,7 +65,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="update", method= RequestMethod.POST)
-	public UserUpdateRsp update(UserUpdateReq req) {
+	public UserUpdateRsp update(@Valid UserUpdateReq req) {
 		return userService.update(req);
 	}
 
