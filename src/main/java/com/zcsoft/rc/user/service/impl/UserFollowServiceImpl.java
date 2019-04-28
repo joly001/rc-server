@@ -3,12 +3,14 @@ package com.zcsoft.rc.user.service.impl;
 
 import javax.annotation.Resource;
 
+import com.sharingif.cube.core.exception.validation.ValidationCubeException;
 import com.sharingif.cube.core.util.StringUtils;
 import com.zcsoft.rc.api.machinery.entity.MachineryListRsp;
 import com.zcsoft.rc.api.user.entity.UserFollowReq;
 import com.zcsoft.rc.api.user.entity.UserMachineryFollowReq;
 import com.zcsoft.rc.api.user.entity.UserMachineryUnFollowReq;
 import com.zcsoft.rc.api.user.entity.UserUnFollowReq;
+import com.zcsoft.rc.app.constants.ErrorConstants;
 import com.zcsoft.rc.user.model.entity.User;
 import com.zcsoft.rc.user.service.UserService;
 import org.springframework.stereotype.Service;
@@ -77,12 +79,7 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		List<User> userList = userService.getOrganizationId(req.getOrganizationId());
 
 		if(userList == null || userList.isEmpty()) {
-			UserFollow userFollow = new UserFollow();
-			userFollow.setUserId(user.getId());
-			userFollow.setUserFollowId(req.getOrganizationId());
-			userFollow.setFollowType(UserFollow.FOLLOW_TYPE_ORGANIZATION);
-			userFollowDAO.insert(userFollow);
-			return;
+			throw new ValidationCubeException(ErrorConstants.USER_DEPARTMENT_NOT_DATA);
 		}
 
 		follow(user.getId(), req.getOrganizationId(), userList);
