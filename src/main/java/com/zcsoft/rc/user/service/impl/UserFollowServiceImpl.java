@@ -64,6 +64,9 @@ public class UserFollowServiceImpl extends BaseServiceImpl<UserFollow, java.lang
 		userFollowDAO.insert(userFollow);
 
 		userList.forEach(queryUser -> {
+			if(queryUser.getId().equals(userId)) {
+				return;
+			}
 			follow(queryUser.getId(), userId, UserFollow.FOLLOW_TYPE_USER);
 		});
 	}
