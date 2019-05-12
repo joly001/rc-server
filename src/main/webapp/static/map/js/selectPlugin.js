@@ -24,10 +24,10 @@ var SelectPlugin = (function(){
             var id = data.id?data.id:data[o.customKeyValue.id];
             var name = data.name?data.name:data[o.customKeyValue.name];
             str +=
-            '<li style="overflow: auto;margin-top: 10px">'+
+            '<li style="overflow: auto;margin-top: 10px;padding-left: 18px;position: relative">'+
                 '<div class="liDiv" style="overflow: auto;" dataType = "'+i+'" id = "'+id+'">'+
-                  '<a style="float: left;margin-left: 5px;">'+name+'</a>'+
-                  '<div class="arr" style="float: left;margin-left: 10px;">'+
+                  '<a style="float: left;margin-left: 5px;cursor: pointer">'+name+'</a>'+
+                  '<div class="arr" style="float: right;margin-left: 10px;margin-right: 8px">'+
                         '<div class="arrUp"></div>'+
                         '<div class="arrDown"></div>'+
                     '</div>'+
@@ -92,12 +92,15 @@ var SelectPlugin = (function(){
         }
 
         if( typeof(options.fn) != 'function' ) return;
-
         for(var i=0;i<length;i++){
             var id = options.data[i].id?options.data[i].id:options.data[i][options.customKeyValue.id];
             $("#"+id).data(options.data[i]);
             $("#"+id).click(function(){
-                options.fn(this);
+            $('#workingInterval').find('.select-plugin__active').each(function (index, ele) {
+                $(ele).removeClass('select-plugin__active')
+            })
+            $(this).addClass("select-plugin__active")
+            options.fn(this);
             })
         }
     }

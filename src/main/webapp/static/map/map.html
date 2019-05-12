@@ -7,14 +7,19 @@
     <title></title>
       <link type="text/css" rel="stylesheet" href="css/map.css">
       <link type="text/css" rel="stylesheet" href="css/compoentsBase.css">
-      <link href="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol.css" rel="stylesheet">
+      <!--<link href="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol.css" rel="stylesheet">
       <script src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol-debug.js"></script>
-      <script type="text/javascript" src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/iclient9-openlayers.js"></script>
+      <script type="text/javascript" src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/include-openlayers.js"></script>
+      -->
+      <script type="text/javascript" src="lib/include-openlayers.js"></script>
       <script type="text/javascript" src="lib/jquery-1.7.1.js"></script>
       <script src="lib/axios.min.js"></script>
       <script src="js/jquery.jqtransform.js"></script>
       <script src="js/datagrid.js"></script>
       <script src="js/pageConfig.js"></script>
+      <script type="text/javascript" src="js/CordonLine.js"></script>
+      <script type="text/javascript" src="js/Cable.js"></script>
+      <script type="text/javascript" src="js/Kilometer.js"></script>
       <script type="text/javascript" src="js/map.js"></script>
       <script type="text/javascript" src="js/MessageControl.js"></script>
       <script type="text/javascript" src="js/selectPlugin.js"></script>
@@ -22,9 +27,11 @@
   </head>
   <body>
     <div id="map"></div>
+
     <div id="popup" class="ol-popup">
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
         <div id="popup-content" style="width:230px; height:35px;color:red;"></div>
     </div>
+
   </body>
 </html>
