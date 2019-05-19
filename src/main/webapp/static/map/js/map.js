@@ -12,6 +12,7 @@ var TrainMap = (function(){
     var map, layer, view, options,vectorLayer,sourceVector,prjCoordSys,overlay,epsgcode,url = "http://119.3.246.90:8090/iserver/services/map-ugcv5-DongZhan333DiTu/rest/maps/东站333底图",isMvt = false;
     var lon=0,lat=0,zoomlevel=2,initZoomToScale;
     var envelope;
+    var waringObj = {}
 
     function _(optionsObj){
         var queryString = "";
