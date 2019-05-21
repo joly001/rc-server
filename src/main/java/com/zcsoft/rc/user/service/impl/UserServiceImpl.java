@@ -130,7 +130,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
-		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
+		rsp.setBuilderUserType(user.getBuilderUserType());
 
 		return rsp;
 	}
@@ -146,7 +146,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, String> implements Us
 
 		Organization organization = organizationService.getById(user.getOrganizationId());
 		rsp.setOrgName(organization.getOrgName());
-		rsp.setBuilderUserType(convertBuilderUserType(user.getBuilderUserType()));
+		rsp.setBuilderUserType(user.getBuilderUserType());
 
 		return rsp;
 	}
