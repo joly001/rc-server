@@ -39,8 +39,9 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 		paginationCondition.setCondition(queryWorkWarning);
 		paginationCondition.setCurrentPage(req.getCurrentPage());
 		paginationCondition.setPageSize(Constants.PAGE_SIZE);
+		paginationCondition.setQueryCount(false);
 
-		PaginationRepertory<WorkWarning> paginationRepertory = workWarningDAO.queryPagination(paginationCondition);
+		PaginationRepertory<WorkWarning> paginationRepertory = workWarningDAO.queryPaginationListByUserId(paginationCondition);
 
 		HttpPaginationRepertory<WorkWarningListRsp> httpPaginationRepertory = new HttpPaginationRepertory<>(
 				paginationRepertory.getTotalCount()
