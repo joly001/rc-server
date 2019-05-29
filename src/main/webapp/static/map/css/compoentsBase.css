@@ -228,3 +228,56 @@ position: absolute;right: 0px;width:20px;height:25px;background:url(../images/ar
     background: #0086c2;
     opacity: .1;
 }
+.personInfomation{
+    position: absolute;
+    width: 240px;
+    background: rgba(255,255,255,0.6);
+    bottom: 350px;
+    left: 21px;
+    padding-bottom: 10px;
+    border-style: solid;
+    border-color: #4680D9;
+    border-radius: 10px;
+    border-width: 1px
+}
+
+.closeBtn{
+    margin-right: 20px;
+    border-radius: 13px;
+    width: 60px;
+    height:26px;
+    background: rgba(70,128,217,1);
+    border-style: none;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.tableStlyle{
+    margin-left: 15px;font-size: 12px;width: 210px;text-align: center;
+}
+
+.tableStlyle tr{
+    border-bottom-color: rgba(220,221,222,1);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    display: block;
+}
+
+.tableTdl{
+    width: 55px;
+}
+
+.alarmTable{
+    margin-left: 15px;font-size: 12px;width: 210px;text-align: center;
+}
+
+.alarmTable tr{
+    border-bottom-color: rgba(220,221,222,1);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    display: block;
+}
+
+.alarmTable td{
+    width: 66px;
+}

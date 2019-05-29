@@ -78,7 +78,7 @@
             }
         }
         if (!inArray(excludes, 'iclient9-openlayers-css')) {
-            inputCSS("lib/dist/openlayers/iclient9-openlayers.min.css");
+            inputCSS("lib/iclient9-openlayers.min.css");
         }
         if (inArray(includes, 'echarts')) {
             inputScript("https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.min.js");
