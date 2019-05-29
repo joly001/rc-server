@@ -34,6 +34,9 @@ public class WorkWarningServiceImpl extends BaseServiceImpl<WorkWarning, String>
 	@Override
 	public HttpPaginationRepertory<WorkWarningListRsp> list(HttpPaginationCondition<WorkWarningListReq> req, User user) {
 		WorkWarning queryWorkWarning = new WorkWarning();
+		if(req.getCondition() != null) {
+			queryWorkWarning.setNick(req.getCondition().getNick());
+		}
 		queryWorkWarning.setUserId(user.getId());
 		PaginationCondition<WorkWarning> paginationCondition = new PaginationCondition<>();
 		paginationCondition.setCondition(queryWorkWarning);
