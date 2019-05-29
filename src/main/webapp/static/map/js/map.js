@@ -9,7 +9,7 @@ function mercatorTolonlat(mercator){
 }
 
 var TrainMap = (function(){
-    var map, layer, view, options,vectorLayer,sourceVector,prjCoordSys,overlay,epsgcode,url = "http://119.3.246.90:8090/iserver/services/map-ugcv5-DongZhan333DiTu/rest/maps/东站333底图",isMvt = false;
+    var map, layer, view, options,vectorLayer,sourceVector,prjCoordSys,overlay,epsgcode,url = "http://119.3.246.90:8090/iserver/services/ditu/rest/maps/ditu",isMvt = false;
     var lon=0,lat=0,zoomlevel=2,initZoomToScale;
     var envelope;
     var waringObj = {};
@@ -25,12 +25,12 @@ var TrainMap = (function(){
             }
         }
 
-        var originResult = {"viewBounds":{"top":41.554970602788565,"left":82.14006286791144,"bottom":41.51625114941144,"leftBottom":{"x":82.14006286791144,"y":41.51625114941144},"right":82.17878232128857,"rightTop":{"x":82.17878232128857,"y":41.554970602788565}},"viewer":{"leftTop":{"x":0,"y":0},"top":0,"left":0,"bottom":256,"rightBottom":{"x":256,"y":256},"width":256,"right":256,"height":256},"distanceUnit":null,"minVisibleTextSize":0,"coordUnit":"DEGREE","scale":1.5714552575179423E-5,"description":null,"paintBackground":false,"maxVisibleTextSize":0,"maxVisibleVertex":0,"clipRegionEnabled":false,"antialias":false,"textOrientationFixed":false,"angle":0,"prjCoordSys":{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.0033528106647474805,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}},"minScale":0,"markerAngleFixed":false,"overlapDisplayedOptions":null,"visibleScales":[1.5714552575179423E-5,3.1429105150358845E-5,6.28582103007175E-5,1.257164206014358E-4,2.5143284120286843E-4,5.028656824057495E-4,0.001005731364811499,0.002011462729622998],"visibleScalesEnabled":true,"customEntireBoundsEnabled":false,"clipRegion":null,"maxScale":0,"customParams":"","center":{"x":82.1594225946,"y":41.5356108761},"dynamicPrjCoordSyses":[{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.0033528106647474805,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}}],"colorMode":null,"textAngleFixed":false,"overlapDisplayed":false,"userToken":{"userID":""},"cacheEnabled":false,"dynamicProjection":false,"autoAvoidEffectEnabled":true,"customEntireBounds":null,"name":"东站333底图","bounds":{"top":41.5500857651,"left":82.0631768268,"bottom":41.5211359871,"leftBottom":{"x":82.0631768268,"y":41.5211359871},"right":82.2556683624,"rightTop":{"x":82.2556683624,"y":41.5500857651}},"backgroundStyle":null};
+        var originResult = {"viewBounds":{"top":41.5500857651,"left":81.5096352129,"bottom":40.8040526156,"leftBottom":{"x":81.5096352129,"y":40.8040526156},"right":82.25566836239999,"rightTop":{"x":82.25566836239999,"y":41.5500857651}},"viewer":{"leftTop":{"x":0,"y":0},"top":0,"left":0,"bottom":256,"rightBottom":{"x":256,"y":256},"width":256,"right":256,"height":256},"distanceUnit":null,"minVisibleTextSize":0,"coordUnit":"DEGREE","scale":8.155922912634746E-7,"description":"","paintBackground":false,"maxVisibleTextSize":0,"maxVisibleVertex":0,"clipRegionEnabled":false,"antialias":true,"textOrientationFixed":false,"angle":0,"prjCoordSys":{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}},"minScale":0,"markerAngleFixed":false,"overlapDisplayedOptions":null,"visibleScales":[1.5714552575179423E-5,3.1429105150358845E-5,6.28582103007175E-5,1.257164206014358E-4,2.5143284120286843E-4,5.028656824057495E-4,0.001005731364811499,0.002011462729622998],"visibleScalesEnabled":true,"customEntireBoundsEnabled":false,"clipRegion":null,"maxScale":0,"customParams":"","center":{"x":81.88265178764999,"y":41.17706919035},"dynamicPrjCoordSyses":[{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}}],"colorMode":null,"textAngleFixed":false,"overlapDisplayed":false,"userToken":{"userID":""},"cacheEnabled":true,"dynamicProjection":false,"autoAvoidEffectEnabled":true,"customEntireBounds":null,"name":"ditu","bounds":{"top":41.5500857651,"left":81.5096352129,"bottom":41.3957086657,"leftBottom":{"x":81.5096352129,"y":41.3957086657},"right":82.2556683624,"rightTop":{"x":82.2556683624,"y":41.5500857651}},"backgroundStyle":{"fillGradientOffsetRatioX":0,"markerSize":0,"fillForeColor":{"red":255,"green":0,"blue":0,"alpha":255},"fillGradientOffsetRatioY":0,"markerWidth":0,"markerAngle":0,"fillSymbolID":0,"lineColor":{"red":0,"green":0,"blue":0,"alpha":255},"markerSymbolID":0,"lineWidth":0.01,"markerHeight":0,"fillOpaqueRate":100,"fillBackOpaque":false,"fillBackColor":{"red":255,"green":255,"blue":255,"alpha":255},"fillGradientMode":"NONE","lineSymbolID":0,"fillGradientAngle":0}};
         var visibleScales = originResult.visibleScales;
         var visableResolution = [1.512478647543738E-4,7.56239323771869E-5,3.781196618859356E-5,1.890598309429666E-5,9.452991547148448E-6,4.726495773574106E-6,2.363247886787053E-6,1.1816239433935264E-6];
         var prjParamter =  "+proj=longlat +datum=WGS84 +no_defs";
         var attrib = 'Map data &copy; 2013 Lantm?teriet, Imagery &copy; 2013 SuperMap';
-        var projection = 'EPSG:4326';
+        var projection = 'EPSG:3857';
         var maxZoom = 18;
         var zoom = 0;
         this.container = document.getElementById('popup');
@@ -244,6 +244,69 @@ var TrainMap = (function(){
 
         map.addLayer(vectorLayer);
 
+        map.on('pointermove',function(e){
+            var pixel = map.getEventPixel(e.originalEvent);
+            var hit = map.hasFeatureAtPixel(pixel);
+            if(hit){
+                map.getTargetElement().style.cursor = 'pointer';
+            }
+            else{
+                map.getTargetElement().style.cursor = '';
+            }
+        });
+
+        map.on("singleclick",function(e){
+            var pixel = e.pixel;
+            var map = e.map;
+            var f = map.getFeaturesAtPixel(pixel);
+            if(f){
+                f.forEach(function(fe){
+                    var  fId = fe.getId();
+                    var pointsFeature = sourceVector.getFeatureById(fId);
+                    if(pointsFeature){
+                        var manData = fId.split("_");
+                        if(manData.length != 2) return;
+                        console.log(manData);
+                        var manId =manData[0];
+                        var manType = manData[1];
+                        //baseUrl+
+                        axios.post(baseUrl+"/rc-bms/workWarning/userWarningList", {
+                            id: manId,
+                            type: manType
+                        }).then(function (response) {
+                                if(response.data._data){
+                                    $("#nickName").text(response.data._data.nick || "");
+                                    $("#depName").text(response.data._data.depName || "");
+                                    $("#mobile").text(response.data._data.mobile || "");
+                                    $("#roleName").text(response.data._data.roleName || "");
+                                    var textStr = "";
+                                    var listData = response.data._data.list;
+                                    for(var i=0;i<listData.length;i++){
+                                        if(i == 5) return;
+                                        var datetime = new Date();
+                                        datetime.setTime(listData[i].createTime);
+                                        var dYear = datetime.getFullYear();
+                                        var dMonth =datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                                        var dDate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                                        textStr+=
+                                            "<tr class='tableTr'>"+
+                                               "<td>"+listData[i].workSegmentName+"</td>"+
+                                                "<td>"+dYear+"."+dMonth+"."+dDate+"</td>"+
+                                            "<td>"+enumTypeForAlarm[listData[i].type]+"</td>"+
+                                            "</tr>"
+                                    }
+                                    $("#alarmTableTbody").html(textStr);
+                                    $(".personInfomation").show();
+                                }
+                        }).catch(function (error) {
+                                console.log(error);
+                            });
+
+                    }
+                })
+            }
+        })
+
         /*********************显示弹出层**************************/
         var container = document.getElementById("popup");
         var content = document.getElementById("popup-content");
@@ -400,6 +463,7 @@ var TrainMap = (function(){
                 waringObj[arr.properties.id] = false;
             }
         }else{
+
             f= addPoint(arr,this)
             sourceVector.addFeature(f);
         }
@@ -451,7 +515,7 @@ var TrainMap = (function(){
               geometry:new ol.geom.Point(param.geometry.coordinates),
               featuretype:'point'
           });
-          f.setId(param.properties.id);
+          f.setId(param.properties.id+"_"+param.properties.type);
           f.set("showType",param.properties.type);
           if($("#t"+param.properties.type).is(':checked')){
               f.setStyle(styleFunction(param.properties.type));

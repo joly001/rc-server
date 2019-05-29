@@ -1,37 +1,101 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  minimum-scale=1.0, user-scalable=0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta charset="UTF-8">
-    <title></title>
-    <link type="text/css" rel="stylesheet" href="css/map.css">
-    <link type="text/css" rel="stylesheet" href="css/compoentsBase.css">
-    <!--<link href="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol.css" rel="stylesheet">
-    <script src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol-debug.js"></script>
-    <script type="text/javascript" src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/include-openlayers.js"></script>
-    -->
-    <script type="text/javascript" src="lib/include-openlayers.js"></script>
-    <script type="text/javascript" src="lib/jquery-1.7.1.js"></script>
-    <script src="lib/axios.min.js"></script>
-    <script src="js/jquery.jqtransform.js"></script>
-    <script src="js/datagrid.js"></script>
-    <script src="js/pageConfig.js"></script>
-    <script type="text/javascript" src="js/CordonLine.js"></script>
-    <script type="text/javascript" src="js/Cable.js"></script>
-    <script type="text/javascript" src="js/Kilometer.js"></script>
-    <script type="text/javascript" src="js/map.js"></script>
-    <script type="text/javascript" src="js/MessageControl.js"></script>
-    <script type="text/javascript" src="js/selectPlugin.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0,  minimum-scale=1.0, user-scalable=0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta charset="UTF-8">
+  <title></title>
+  <link type="text/css" rel="stylesheet" href="css/map.css">
+  <link type="text/css" rel="stylesheet" href="css/compoentsBase.css">
+  <!--<link href="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol.css" rel="stylesheet">
+  <script src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/ol-debug.js"></script>
+  <script type="text/javascript" src="http://47.94.11.219:8090/iserver/services/map-KUA/rest/static/openlayers3ForMaps/libs/include-openlayers.js"></script>
+  -->
+  <script type="text/javascript" src="lib/include-openlayers.js"></script>
+  <script type="text/javascript" src="lib/jquery-1.7.1.js"></script>
+  <script src="lib/axios.min.js"></script>
+  <script src="js/jquery.jqtransform.js"></script>
+  <script src="js/datagrid.js"></script>
+  <script src="js/pageConfig.js"></script>
+  <script type="text/javascript" src="js/CordonLine.js"></script>
+  <script type="text/javascript" src="js/Cable.js"></script>
+  <script type="text/javascript" src="js/Kilometer.js"></script>
+  <script type="text/javascript" src="js/map.js"></script>
+  <script type="text/javascript" src="js/MessageControl.js"></script>
+  <script type="text/javascript" src="js/selectPlugin.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div id="map"></div>
 
-    <div id="popup" class="ol-popup">
-        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content" style="width:230px; height:35px;color:red;"></div>
-    </div>
+  <div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content" style="width:230px; height:35px;color:red;"></div>
+  </div>
 
-  </body>
+</body>
+<style>
+  .nav-menu__detail{
+    display: none;
+    width: 300px;
+    position: absolute;
+    top: 105px;
+    left: 380px;
+    overflow: hidden;
+    background: rgba(25,35,50,1);
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .nav-menu__detail .title{
+    position: relative;
+    border-left: 4px solid #0086c2;
+    text-align: center;
+    background: rgba(255,255,255,.1);
+    color: #999;
+  }
+  .nav-menu__detail .content {
+    font-size: 14px;
+    padding: 0 15px;
+  }
+  .nav-menu__detail .content span:first-child{
+    vertical-align: top;
+    display: inline-block;
+    width: 100px;
+  }
+  .nav-menu__detail .main-c{
+    color: #0086c2;
+  }
+  .nav-menu__detail .nd-4{
+    line-height: 22px;
+    margin-top: 4px;
+  }
+  .nav-menu__detail .content span:last-child{
+    display: inline-block;
+    white-space: pre-line;
+  }
+  .nav-menu__detail .close{
+    position: absolute;
+    font-size: 12px;
+    height: 30px;
+    right: 15px;
+    color: #999;
+    opacity: .7;
+    transition: all .3s;
+    cursor: pointer;
+  }
+  .nav-menu__detail .close:hover{
+    opacity: 1;
+  }
+  .nav-menu__detail .close:active{
+    opacity: .7;
+  }
+</style>
+<script>
+  $('#menu-close').click(function () {
+    $('.nav-menu__detail').hide()
+  })
+</script>
 </html>
