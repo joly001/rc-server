@@ -274,33 +274,33 @@ var TrainMap = (function(){
                             id: manId,
                             type: manType
                         }).then(function (response) {
-                                if(response.data._data){
-                                    $("#nickName").text(response.data._data.nick || "");
-                                    $("#depName").text(response.data._data.depName || "");
-                                    $("#mobile").text(response.data._data.mobile || "");
-                                    $("#roleName").text(response.data._data.roleName || "");
-                                    var textStr = "";
-                                    var listData = response.data._data.list;
-                                    for(var i=0;i<listData.length;i++){
-                                        if(i == 5) return;
-                                        var datetime = new Date();
-                                        datetime.setTime(listData[i].createTime);
-                                        var dYear = datetime.getFullYear();
-                                        var dMonth =datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                                        var dDate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                                        textStr+=
-                                            "<tr class='tableTr'>"+
-                                               "<td>"+listData[i].workSegmentName+"</td>"+
-                                                "<td>"+dYear+"."+dMonth+"."+dDate+"</td>"+
-                                            "<td>"+enumTypeForAlarm[listData[i].type]+"</td>"+
-                                            "</tr>"
-                                    }
-                                    $("#alarmTableTbody").html(textStr);
-                                    $(".personInfomation").show();
+                            if(response.data._data){
+                                $("#nickName").text(response.data._data.nick || "");
+                                $("#depName").text(response.data._data.depName || "");
+                                $("#mobile").text(response.data._data.mobile || "");
+                                $("#roleName").text(response.data._data.roleName || "");
+                                var textStr = "";
+                                var listData = response.data._data.list;
+                                for(var i=0;i<listData.length;i++){
+                                    if(i == 5) return;
+                                    var datetime = new Date();
+                                    datetime.setTime(listData[i].createTime);
+                                    var dYear = datetime.getFullYear();
+                                    var dMonth =datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                                    var dDate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                                    textStr+=
+                                        "<tr class='tableTr'>"+
+                                        "<td>"+listData[i].workSegmentName+"</td>"+
+                                        "<td>"+dYear+"."+dMonth+"."+dDate+"</td>"+
+                                        "<td>"+enumTypeForAlarm[listData[i].type]+"</td>"+
+                                        "</tr>"
                                 }
+                                $("#alarmTableTbody").html(textStr);
+                                $(".personInfomation").show();
+                            }
                         }).catch(function (error) {
-                                console.log(error);
-                            });
+                            console.log(error);
+                        });
 
                     }
                 })
@@ -449,7 +449,8 @@ var TrainMap = (function(){
         return map;
     }
     _.prototype.addPoints = function(arr){
-        var f = sourceVector.getFeatureById(arr.properties.id);
+        var pointId = arr.properties.id+"_"+arr.properties.type;
+        var f = sourceVector.getFeatureById(pointId);
         if(f){
             f.getGeometry().setCoordinates(arr.geometry.coordinates);
             if(arr.properties.warningStatus == "true" && $("#t"+arr.properties.type).is(':checked')){
@@ -482,27 +483,27 @@ var TrainMap = (function(){
 
 
     _.prototype.showForType = function(type,isShow){
-            var features = sourceVector.getFeatures();
-            for(var i=0;i<features.length;i++){
-                   var f =  features[i];
-                   var id = f.getId();
-                   var fType = f.get("showType")
-                   if(fType == type && isShow){
-                       //显示
-                       f.setStyle(styleFunction(type));
-                   }else if(fType == type){
-                       //隐藏
-                       f.setStyle(new ol.style.Style({
-                           zIndex:0
-                       }));
+        var features = sourceVector.getFeatures();
+        for(var i=0;i<features.length;i++){
+            var f =  features[i];
+            var id = f.getId();
+            var fType = f.get("showType")
+            if(fType == type && isShow){
+                //显示
+                f.setStyle(styleFunction(type));
+            }else if(fType == type){
+                //隐藏
+                f.setStyle(new ol.style.Style({
+                    zIndex:0
+                }));
 
-                       if(waringObj[id]){
-                           overlay.setPosition(undefined);
-                           waringObj[id] = false;
-                       }
-                   }
-
+                if(waringObj[id]){
+                    overlay.setPosition(undefined);
+                    waringObj[id] = false;
+                }
             }
+
+        }
     }
 
     _.prototype.showForLayer = function (type,isShow){
@@ -510,30 +511,30 @@ var TrainMap = (function(){
     }
 
 
-     function addPoint (param,o){
-          var f =  new ol.Feature({
-              geometry:new ol.geom.Point(param.geometry.coordinates),
-              featuretype:'point'
-          });
-          f.setId(param.properties.id+"_"+param.properties.type);
-          f.set("showType",param.properties.type);
-          if($("#t"+param.properties.type).is(':checked')){
-              f.setStyle(styleFunction(param.properties.type));
-          }else{
-              f.setStyle(new ol.style.Style({
-                  // 设置一个标识
-                  zIndex:0
-              }));
-          }
-          f.setStyle(styleFunction(param.properties.type));
-          if((param.properties.warningStatus == "true") && $("#t"+param.properties.type).is(':checked')){
-              var waringData = $.parseJSON(param.properties.warning);
-              o.content.innerHTML = waringData.waringContent ;
-              overlay.setPosition(param.geometry.coordinates);
-              map.addOverlay(overlay);
-          }
-          return f;
-      }
+    function addPoint (param,o){
+        var f =  new ol.Feature({
+            geometry:new ol.geom.Point(param.geometry.coordinates),
+            featuretype:'point'
+        });
+        f.setId(param.properties.id+"_"+param.properties.type);
+        f.set("showType",param.properties.type);
+        if($("#t"+param.properties.type).is(':checked')){
+            f.setStyle(styleFunction(param.properties.type));
+        }else{
+            f.setStyle(new ol.style.Style({
+                // 设置一个标识
+                zIndex:0
+            }));
+        }
+        f.setStyle(styleFunction(param.properties.type));
+        if((param.properties.warningStatus == "true") && $("#t"+param.properties.type).is(':checked')){
+            var waringData = $.parseJSON(param.properties.warning);
+            o.content.innerHTML = waringData.waringContent ;
+            overlay.setPosition(param.geometry.coordinates);
+            map.addOverlay(overlay);
+        }
+        return f;
+    }
 
     function  styleFunction(type) {
         var  imgSrc= 'images/106.png';
