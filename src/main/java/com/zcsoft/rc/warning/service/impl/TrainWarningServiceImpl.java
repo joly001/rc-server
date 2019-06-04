@@ -53,7 +53,7 @@ public class TrainWarningServiceImpl extends BaseServiceImpl<TrainWarning, Strin
 		paginationCondition.setPageSize(Constants.PAGE_SIZE);
 		paginationCondition.setQueryCount(false);
 
-		PaginationRepertory<TrainWarning> paginationRepertory = trainWarningDAO.queryPagination(paginationCondition);
+		PaginationRepertory<TrainWarning> paginationRepertory = trainWarningDAO.queryPaginationListByUserId(paginationCondition);
 
 		HttpPaginationRepertory<TrainWarningListRsp> httpPaginationRepertory = new HttpPaginationRepertory<>(
 				paginationRepertory.getTotalCount()
