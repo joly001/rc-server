@@ -25,7 +25,7 @@ var TrainMap = (function(){
             }
         }
 
-        var originResult = {"viewBounds":{"top":41.5500857651,"left":81.5096352129,"bottom":40.8040526156,"leftBottom":{"x":81.5096352129,"y":40.8040526156},"right":82.25566836239999,"rightTop":{"x":82.25566836239999,"y":41.5500857651}},"viewer":{"leftTop":{"x":0,"y":0},"top":0,"left":0,"bottom":256,"rightBottom":{"x":256,"y":256},"width":256,"right":256,"height":256},"distanceUnit":null,"minVisibleTextSize":0,"coordUnit":"DEGREE","scale":8.155922912634746E-7,"description":"","paintBackground":false,"maxVisibleTextSize":0,"maxVisibleVertex":0,"clipRegionEnabled":false,"antialias":true,"textOrientationFixed":false,"angle":0,"prjCoordSys":{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}},"minScale":0,"markerAngleFixed":false,"overlapDisplayedOptions":null,"visibleScales":[1.5714552575179423E-5,3.1429105150358845E-5,6.28582103007175E-5,1.257164206014358E-4,2.5143284120286843E-4,5.028656824057495E-4,0.001005731364811499,0.002011462729622998],"visibleScalesEnabled":true,"customEntireBoundsEnabled":false,"clipRegion":null,"maxScale":0,"customParams":"","center":{"x":81.88265178764999,"y":41.17706919035},"dynamicPrjCoordSyses":[{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}}],"colorMode":null,"textAngleFixed":false,"overlapDisplayed":false,"userToken":{"userID":""},"cacheEnabled":true,"dynamicProjection":false,"autoAvoidEffectEnabled":true,"customEntireBounds":null,"name":"ditu","bounds":{"top":41.5500857651,"left":81.5096352129,"bottom":41.3957086657,"leftBottom":{"x":81.5096352129,"y":41.3957086657},"right":82.2556683624,"rightTop":{"x":82.2556683624,"y":41.5500857651}},"backgroundStyle":{"fillGradientOffsetRatioX":0,"markerSize":0,"fillForeColor":{"red":255,"green":0,"blue":0,"alpha":255},"fillGradientOffsetRatioY":0,"markerWidth":0,"markerAngle":0,"fillSymbolID":0,"lineColor":{"red":0,"green":0,"blue":0,"alpha":255},"markerSymbolID":0,"lineWidth":0.01,"markerHeight":0,"fillOpaqueRate":100,"fillBackOpaque":false,"fillBackColor":{"red":255,"green":255,"blue":255,"alpha":255},"fillGradientMode":"NONE","lineSymbolID":0,"fillGradientAngle":0}};
+        var originResult = {"viewBounds":{"top":42.031301253950005,"left":80.79893941994999,"bottom":37.777988995950025,"leftBottom":{"x":80.79893941994999,"y":37.777988995950025},"right":85.05225167794998,"rightTop":{"x":85.05225167794998,"y":42.031301253950005}},"viewer":{"leftTop":{"x":0,"y":0},"top":0,"left":0,"bottom":256,"rightBottom":{"x":256,"y":256},"width":256,"right":256,"height":256},"distanceUnit":null,"minVisibleTextSize":0,"coordUnit":"DEGREE","scale":1.4305530580661277E-7,"description":"","paintBackground":false,"maxVisibleTextSize":0,"maxVisibleVertex":0,"clipRegionEnabled":false,"antialias":true,"textOrientationFixed":false,"angle":0,"prjCoordSys":{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}},"minScale":0,"markerAngleFixed":false,"overlapDisplayedOptions":null,"visibleScales":[1.5714552575179423E-5,3.1429105150358845E-5,6.28582103007175E-5,1.257164206014358E-4,2.5143284120286843E-4,5.028656824057495E-4,0.001005731364811499,0.002011462729622998],"visibleScalesEnabled":true,"customEntireBoundsEnabled":false,"clipRegion":null,"maxScale":0,"customParams":"","center":{"x":82.92559554894999,"y":39.904645124950015},"dynamicPrjCoordSyses":[{"distanceUnit":"METER","projectionParam":null,"epsgCode":4326,"coordUnit":"DEGREE","name":"Longitude / Latitude Coordinate System---GCS_WGS_1984","projection":null,"type":"PCS_EARTH_LONGITUDE_LATITUDE","coordSystem":{"datum":{"name":"D_WGS_1984","type":"DATUM_WGS_1984","spheroid":{"flatten":0.00335281066474748,"name":"WGS_1984","axis":6378137,"type":"SPHEROID_WGS_1984"}},"unit":"DEGREE","spatialRefType":"SPATIALREF_EARTH_LONGITUDE_LATITUDE","name":"GCS_WGS_1984","type":"GCS_WGS_1984","primeMeridian":{"longitudeValue":0,"name":"Greenwich","type":"PRIMEMERIDIAN_GREENWICH"}}}],"colorMode":null,"textAngleFixed":false,"overlapDisplayed":false,"userToken":{"userID":""},"cacheEnabled":true,"dynamicProjection":false,"autoAvoidEffectEnabled":true,"customEntireBounds":null,"name":"ditu","bounds":{"top":42.031301253950005,"left":80.79893941995,"bottom":41.30117310385,"leftBottom":{"x":80.79893941995,"y":41.30117310385},"right":85.05225167794998,"rightTop":{"x":85.05225167794998,"y":42.031301253950005}},"backgroundStyle":{"fillGradientOffsetRatioX":0,"markerSize":0,"fillForeColor":{"red":255,"green":0,"blue":0,"alpha":255},"fillGradientOffsetRatioY":0,"markerWidth":0,"markerAngle":0,"fillSymbolID":0,"lineColor":{"red":0,"green":0,"blue":0,"alpha":255},"markerSymbolID":0,"lineWidth":0.01,"markerHeight":0,"fillOpaqueRate":100,"fillBackOpaque":false,"fillBackColor":{"red":255,"green":255,"blue":255,"alpha":255},"fillGradientMode":"NONE","lineSymbolID":0,"fillGradientAngle":0}};
         var visibleScales = originResult.visibleScales;
         var visableResolution = [1.512478647543738E-4,7.56239323771869E-5,3.781196618859356E-5,1.890598309429666E-5,9.452991547148448E-6,4.726495773574106E-6,2.363247886787053E-6,1.1816239433935264E-6];
         var prjParamter =  "+proj=longlat +datum=WGS84 +no_defs";
@@ -262,6 +262,9 @@ var TrainMap = (function(){
             if(f){
                 f.forEach(function(fe){
                     var  fId = fe.getId();
+                    if(!fId){
+                        return;
+                    }
                     var pointsFeature = sourceVector.getFeatureById(fId);
                     if(pointsFeature){
                         var manData = fId.split("_");
@@ -508,8 +511,100 @@ var TrainMap = (function(){
 
     _.prototype.showForLayer = function (type,isShow){
 
+    };
+
+    var safetyZoneLayer;
+    var safetyZoneSource;
+    var safetyZoneDraw;
+    _.prototype.addSafetyZone = function (){
+        safetyZoneSource = new ol.source.Vector({wrapX: false});
+
+        var layer = new ol.layer.Vector({
+            source: safetyZoneSource,
+            style: new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'blue',
+                    size: 3
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(0, 0, 255, 0.1)'
+                })
+            })
+        });
+
+        map.addLayer(layer);
+
+        safetyZoneDraw = new ol.interaction.Draw({
+            source: safetyZoneSource,
+            type: "Polygon",
+            snapTolerance: 20
+        });
+
+        map.addInteraction(safetyZoneDraw);
+
+        safetyZoneDraw.on("drawend", function(event){
+            if(confirm("是否保存？")) {
+                axios.post(baseUrl+"/rc-bms/safetyZone/add", {
+                    safetyZone: event.target.T
+                }).then(function (response) {
+                    map.removeInteraction(safetyZoneDraw);
+                    safetyZoneSource.clear();
+                    listSafetyZone();
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                map.removeInteraction(event.target);
+                event.target.getSource().clear();
+            }
+        });
+    };
+
+    _.prototype.deleteAllSafetyZone = function (){
+        axios.post(baseUrl+"/rc-bms/safetyZone/deleteAll", {
+        }).then(function (response) {
+            map.removeLayer(safetyZoneLayer);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    };
+
+    function listSafetyZone() {
+        axios.post(baseUrl+"/rc-bms/safetyZone/list", {
+        }).then(function (response) {
+            if(safetyZoneLayer) {
+                map.removeLayer(safetyZoneLayer);
+            }
+
+            var safetyZoneList = response.data._data.safetyZoneList;
+
+            var polygon = new ol.geom.Polygon(safetyZoneList);
+            var polygonSource = new ol.source.Vector({
+                features: [new ol.Feature(polygon)],
+                wrapX: false
+            });
+            safetyZoneLayer = new ol.layer.Vector({
+                source: polygonSource,
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'blue',
+                        width: 3
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'rgba(0, 0, 255, 0.1)'
+                    })
+                })
+            });
+
+            map.addLayer(safetyZoneLayer);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
+    _.prototype.listSafetyZone = function (){
+        listSafetyZone();
+    };
 
     function addPoint (param,o){
         var f =  new ol.Feature({

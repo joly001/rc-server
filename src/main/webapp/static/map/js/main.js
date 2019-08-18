@@ -43,8 +43,8 @@ function loadMessage() {
 }
 
 function minpoint(a,b){
-    var x=(a[0]+b[0])/2;
-    var y=(a[1]+b[1])/2;
+    var x=a[0];
+    var y=a[1];
     return [x,y];
 
 
